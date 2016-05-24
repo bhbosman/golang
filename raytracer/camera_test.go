@@ -16,6 +16,8 @@ func TestCamera0001(t *testing.T) {
 		mgl64.Vec3{0.0, 0.0, -1.0}.Normalize(),
 		5.0,
 		4.0/3.0)
+		
+		
 
 	testCase := bhbosmanTest.MyTestingT{t}
 	testCase.CheckVector(mgl64.Vec3{-2.0, 1.5, 0.0}, c.TopLeft(), "TopLeft incorrect")
