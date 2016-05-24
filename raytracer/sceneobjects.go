@@ -4,6 +4,7 @@ import (
 	"math"
 
 	"github.com/go-gl/mathgl/mgl64"
+	bhbosmanVector "github.com/bhbosman/golang/vector"
 )
 
 // Material ...
@@ -124,7 +125,7 @@ func (scene Scene) CalculateLight(sceneObject SceneObject, pointOfInterest mgl64
 			viewerPosition,
 			lightObj,
 			sceneObject)
-		lightcolor = lightcolor.Mul(1.0 / Distance(lightObj.GetPosition(), pointOfInterest))
+		lightcolor = lightcolor.Mul(1.0 / bhbosmanVector.Distance(lightObj.GetPosition(), pointOfInterest))
 
 		color = color.Add(lightcolor)
 	}
@@ -157,7 +158,7 @@ func (scene Scene) internalRayIntersect(r Ray, depth int, colorValueIntensity fl
 		if sceneObject.GetMaterial(phit).GetPs() > 0.0 {
 			colorValueIntensity *= (sceneObjectMaterial.GetPs() * 0.80)
 			if colorValueIntensity > 1e-08 {
-				reflectionDirection := SpecularReflection(nhit, r.Direction)
+				reflectionDirection := bhbosmanVector.SpecularReflection(nhit, r.Direction)
 				reflectionRay := Ray{
 					phit.Add(reflectionDirection.Mul(1e-8)),
 					reflectionDirection,
@@ -195,7 +196,7 @@ func (scene Scene) internalRayIntersect(r Ray, depth int, colorValueIntensity fl
 
 					absorbance := sceneObjectMaterial.GetColor().Mul(0.25 * (-refractionDistance))
 					transparency := mgl64.Vec3{math.Exp(absorbance[0]), math.Exp(absorbance[1]), math.Exp(absorbance[2])}
-					refractionColor = MultiScalar(localRefractionColor, transparency)
+					refractionColor = bhbosmanVector.MultiScalar(localRefractionColor, transparency)
 				}
 			}
 

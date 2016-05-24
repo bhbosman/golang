@@ -1,4 +1,4 @@
-package raytracer
+package testing
 
 
 import (
@@ -58,6 +58,8 @@ func (t *MyTestingT) CheckFloat64(expected, actual float64, s string) {
 		t.CheckBool(false, errorMessage)
 	}
 }
+
+
 
 // CheckVector ...
 func (t *MyTestingT) CheckVector(expected, actual mgl64.Vec3, s string) {

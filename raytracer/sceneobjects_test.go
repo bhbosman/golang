@@ -4,10 +4,11 @@ import (
 	"testing"
 
 	"github.com/go-gl/mathgl/mgl64"
+	bhbosmanTest "github.com/bhbosman/golang/testing"
 )
 
 func TestRayIntersectWithOldMechanism(t *testing.T) {
-	bhbTest := MyTestingT{t}
+	bhbTest := bhbosmanTest.MyTestingT{t}
 
 	scene := CreateDefaultScene()
 

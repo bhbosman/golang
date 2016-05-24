@@ -2,6 +2,7 @@ package raytracer
 
 import (
 	"github.com/go-gl/mathgl/mgl64"
+	bhbosmanVector "github.com/bhbosman/golang/vector"
 )
 
 // Camera ...
@@ -34,7 +35,7 @@ func (c *Camera) Init2(
 	c.direction.x = c.direction.z.Cross(c.direction.y)
 
 	// work out the distances of the place
-	TopDownDistance := Distance(bottomLeft, topLeft)
+	TopDownDistance := bhbosmanVector.Distance(bottomLeft, topLeft)
 	LeftRightDistance := TopDownDistance * aspectRatio
 
 	c.plane.topLeft = topLeft
@@ -87,12 +88,12 @@ func (c *Camera) BottomRight() mgl64.Vec3 {
 
 // GetHeight ...
 func (c *Camera) GetHeight() float64 {
-	return Distance(c.plane.topLeft, c.plane.bottomLeft)
+	return bhbosmanVector.Distance(c.plane.topLeft, c.plane.bottomLeft)
 }
 
 // GetWidth ...
 func (c *Camera) GetWidth() float64 {
-	return Distance(c.plane.topLeft, c.plane.topRight)
+	return bhbosmanVector.Distance(c.plane.topLeft, c.plane.topRight)
 }
 
 // GetDirectionX ...

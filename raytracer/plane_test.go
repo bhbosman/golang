@@ -3,10 +3,10 @@ package raytracer
 import (
 	"fmt"
 	"testing"
-	"github.com/go-gl/mathgl/mgl64"
-	
-)
 
+	"github.com/go-gl/mathgl/mgl64"
+	bhbosmanTest "github.com/bhbosman/golang/testing"
+)
 
 func TestPlane00001(t *testing.T) {
 	data := struct {
@@ -17,16 +17,16 @@ func TestPlane00001(t *testing.T) {
 			Plane{
 				Origin: mgl64.Vec3{0, 1, 0},
 				Normal: mgl64.Vec3{0, 1, 0}},
-				MaterialParams{}},
+			MaterialParams{}},
 		Ray{
 			mgl64.Vec3{0, 0, 0},
 			mgl64.Vec3{1.0, 0, 0},
 			0,
 			0}}
 
-	b,  _ := data.p.GetIntersect(data.r)
+	b, _ := data.p.GetIntersect(data.r)
 
-	testCase := MyTestingT{t}
+	testCase := bhbosmanTest.MyTestingT{t}
 	testCase.CheckBool(b != wiNoHit, "must intersect")
 }
 
@@ -39,7 +39,7 @@ func TestPlane00002(t *testing.T) {
 			Plane{
 				mgl64.Vec3{0, 1, 0},
 				mgl64.Vec3{0, 1, 0}},
-				MaterialParams{}},
+			MaterialParams{}},
 		Ray{
 			mgl64.Vec3{0, 0, 0},
 			mgl64.Vec3{0, 0, 1},
@@ -49,7 +49,7 @@ func TestPlane00002(t *testing.T) {
 	b, tt := data.p.GetIntersect(data.r)
 
 	fmt.Println(tt)
-	testCase := MyTestingT{t}
+	testCase := bhbosmanTest.MyTestingT{t}
 	testCase.CheckBool(b != wiNoHit, "must intersect")
 }
 
@@ -59,7 +59,7 @@ func TestPlane00003(t *testing.T) {
 	c.Init2(
 		mgl64.Vec3{-2.0, +1.5, 0.0},
 		mgl64.Vec3{-2.0, -1.5, 0.0},
-		mgl64.Vec3{ 0.0, 0.0, -1.0}.Normalize(),
+		mgl64.Vec3{0.0, 0.0, -1.0}.Normalize(),
 		5.0,
 		4.0/3.0)
 
@@ -69,10 +69,10 @@ func TestPlane00003(t *testing.T) {
 		Plane{
 			mgl64.Vec3{0, -10, 0},
 			mgl64.Vec3{0, -1, 0}},
-			MaterialParams{}}
-	b,  _ := plane.GetIntersect(r)
+		MaterialParams{}}
+	b, _ := plane.GetIntersect(r)
 
-	bhbtest := MyTestingT{t}
+	bhbtest := bhbosmanTest.MyTestingT{t}
 	bhbtest.CheckVector(mgl64.Vec3{-2.0, 1.5, 0.0}, c.TopLeft(), "TopLeft incorrect")
 	bhbtest.CheckVector(mgl64.Vec3{-2.0, -1.5, 0.0}, c.BottomLeft(), "BottomLeft incorrect")
 	bhbtest.CheckVector(mgl64.Vec3{2.0, 1.5, 0.0}, c.TopRight(), "TopRight")
@@ -102,11 +102,11 @@ func TestPlane00004(t *testing.T) {
 	r := p.RayAt(320, 80)
 	plane := StandardPlane{
 		Plane{
-			mgl64.Vec3{0, -10, 0}, 
+			mgl64.Vec3{0, -10, 0},
 			mgl64.Vec3{0, -1, 0}}, MaterialParams{}}
-	b,  _ := plane.GetIntersect(r)
+	b, _ := plane.GetIntersect(r)
 
-	bhbtest := MyTestingT{t}
+	bhbtest := bhbosmanTest.MyTestingT{t}
 	bhbtest.CheckVector(mgl64.Vec3{-2.0, 1.5, 0.0}, c.TopLeft(), "TopLeft incorrect")
 	bhbtest.CheckVector(mgl64.Vec3{-2.0, -1.5, 0.0}, c.BottomLeft(), "BottomLeft incorrect")
 	bhbtest.CheckVector(mgl64.Vec3{2.0, 1.5, 0.0}, c.TopRight(), "TopRight")

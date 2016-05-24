@@ -6,6 +6,7 @@ import (
 	//"fmt"
 
 	"github.com/go-gl/mathgl/mgl64"
+	bhbosmanTest "github.com/bhbosman/golang/testing"
 	
 )
 
@@ -33,7 +34,7 @@ func TestSphere0001(t *testing.T) {
 		4.0}
 
 	willIntersect, timeToIntersect := data.s.GetIntersect(data.r)
-	testCase := MyTestingT{
+	testCase := bhbosmanTest.MyTestingT{
 		t}
 	testCase.CheckBool(float64Eq(timeToIntersect, data.where), "Time not correct")
 	testCase.CheckBool(willIntersect == data.intersect, "This will Intersection!")
@@ -61,7 +62,7 @@ func TestSphere0002(t *testing.T) {
 		0}
 
 	willIntersect, _ := data.s.GetIntersect(data.r)
-	testCase := MyTestingT{t}
+	testCase := bhbosmanTest.MyTestingT{t}
 	testCase.CheckBool(willIntersect == data.intersect, "This will not Intersection!")
 }
 
@@ -85,7 +86,7 @@ func TestSphere0003(t *testing.T) {
 		0.0}
 
 	b, ti := data.s.GetIntersect(data.r)
-	testCase := MyTestingT{t}
+	testCase := bhbosmanTest.MyTestingT{t}
 	testCase.CheckBool(b == data.intersect, "This will Intersection!")
 	testCase.CheckBool(ti == data.where, "This will not Intersection!")
 }
@@ -110,7 +111,7 @@ func TestSphere0004(t *testing.T) {
 		0.0}
 
 	b, ti := data.s.GetIntersect(data.r)
-	testCase := MyTestingT{t}
+	testCase := bhbosmanTest.MyTestingT{t}
 	testCase.CheckBool(b == data.intersect, "This will Intersection!")
 	testCase.CheckFloat64(data.where, ti, "Wrong intersec time")
 }
@@ -135,7 +136,7 @@ func TestSphere0005(t *testing.T) {
 		6.07106781186548}
 
 	b, ti := data.s.GetIntersect(data.r)
-	testCase := MyTestingT{t}
+	testCase := bhbosmanTest.MyTestingT{t}
 	testCase.CheckBool(b == data.intersect, "This will Intersection!")
 	testCase.CheckFloat64(data.where, ti, "Wrong intersec time")
 }
@@ -160,7 +161,7 @@ func TestSphere0006(t *testing.T) {
 		MaterialParams{}}
 	b, time := sphere.GetIntersect(r)
 
-	bhbtest := MyTestingT{t}
+	bhbtest := bhbosmanTest.MyTestingT{t}
 	bhbtest.CheckVector(mgl64.Vec3{-2.0, 1.5, 0.0}, c.TopLeft(), "TopLeft incorrect")
 	bhbtest.CheckVector(mgl64.Vec3{-2.0, -1.5, 0.0}, c.BottomLeft(), "BottomLeft incorrect")
 	bhbtest.CheckVector(mgl64.Vec3{2.0, 1.5, 0.0}, c.TopRight(), "TopRight")
@@ -197,7 +198,7 @@ func TestSphere0007(t *testing.T) {
 		MaterialParams{}}
 	b, time := sphere.GetIntersect(r)
 
-	bhbtest := MyTestingT{t}
+	bhbtest := bhbosmanTest.MyTestingT{t}
 	bhbtest.CheckVector(mgl64.Vec3{-2.0, 1.5, 0.0}, c.TopLeft(), "TopLeft incorrect")
 	bhbtest.CheckVector(mgl64.Vec3{-2.0, -1.5, 0.0}, c.BottomLeft(), "BottomLeft incorrect")
 	bhbtest.CheckVector(mgl64.Vec3{2.0, 1.5, 0.0}, c.TopRight(), "TopRight")
@@ -235,7 +236,7 @@ func TestSphere0008(t *testing.T) {
 		MaterialParams{}}
 	b, time := sphere.GetIntersect(r)
 
-	bhbtest := MyTestingT{t}
+	bhbtest := bhbosmanTest.MyTestingT{t}
 	bhbtest.CheckVector(mgl64.Vec3{-2.0, 1.5, 0.0}, c.TopLeft(), "TopLeft incorrect")
 	bhbtest.CheckVector(mgl64.Vec3{-2.0, -1.5, 0.0}, c.BottomLeft(), "BottomLeft incorrect")
 	bhbtest.CheckVector(mgl64.Vec3{2.0, 1.5, 0.0}, c.TopRight(), "TopRight")
