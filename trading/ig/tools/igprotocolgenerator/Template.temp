@@ -1,0 +1,127 @@
+package igprotocol
+
+// Copyright 2016 The golangtradingig Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// This is an implementation of the IG Trading platform
+// Command: <<.Command>>
+// Method: <<.Method>>
+// Version: <<.Version>>
+
+import (
+	"bytes"
+	"encoding/json"
+	"io/ioutil"
+	"fmt"
+	"net/http"
+	"net/url"
+)
+
+// Send<<.StructName>>Request ...
+func Send<<.StructName>>Request(
+	conn IGConnection, <<CreateInputParam>>
+	headerKeys map[string]string) (*<<.StructName>>ResponseResult, <<KeepResponseBodyAlive>>error) {
+	
+	conn.GetLogger().Log("Send<<.StructName>>Request start...")
+	defer conn.GetLogger().Log("Send<<.StructName>>Request finished.")
+	
+	
+	
+		
+	request, err := Create<<.StructName>>Request(conn, <<UseInputParamBytes>>headerKeys)
+	if err != nil {
+		return nil, err
+	}
+
+	response, err := conn.GetConnection().Do(request)
+	if err != nil {
+		return nil, err
+	}
+	<<CloseResponseBody>>
+
+	<<CreateSessionParam>>
+	
+	ResultData := <<.StructName>>Response{}
+
+	var bodyBytes []byte
+	var jsonData []byte
+	if response.ContentLength != 0 {
+		if conn.GetLogger().GetLogEnabled() {
+			bodyBytes, err = ioutil.ReadAll(response.Body)
+			if err != nil {
+				return nil, err
+			}
+			byteReader := bytes.NewReader(bodyBytes)
+			jsonEncoder := json.NewDecoder(byteReader)
+			err = jsonEncoder.Decode(&ResultData)
+			if err != nil {
+				return nil, err
+			}
+			jsonData, _ = json.Marshal(ResultData)	
+		} else {
+			jsonEncoder := json.NewDecoder(response.Body)
+			err = jsonEncoder.Decode(&ResultData)
+			if err != nil {
+				return nil, err
+			}
+		}
+	}
+	conn.GetLogger().Logf("Raw data received: %s", bodyBytes)
+	conn.GetLogger().Logf("Translated data received: %s", jsonData)
+
+	
+	ResultHeader := HTTPResponseHeader{
+		SecurityToken:    response.Header.Get("X-SECURITY-TOKEN"),
+		Success:          response.StatusCode == <<.ResponseParams.SuccessCode>>,
+		ErrorCode:        ResultData.ErrorCode,
+		ErrorDescription: ErrorDescription(ResultData.ErrorCode),
+		Status:           response.Status,
+		StatusCode:       response.StatusCode}
+
+	result := &<<.StructName>>ResponseResult{
+		Data:        ResultData,
+		<<AssignSessionParam>>
+		Header:      ResultHeader}
+
+	return result, nil
+}
+
+// Create<<.StructName>>Request ...
+func Create<<.StructName>>Request(conn IGConnection,<<CreateReaderParam>>
+	headerKeys map[string]string) (*http.Request, error) {
+	
+	conn.GetLogger().Log("<<.StructName>> start...")
+	defer conn.GetLogger().Log("<<.StructName>> finished.")
+	
+	header := http.Header{}
+	header.Add(ContentTypeConst, "application/json; charset=UTF-8")
+	header.Add(AcceptConst, "application/json; charset=UTF-8")
+	header.Add(VersionConst, "<<.Version>>")
+	
+	for key, value := range headerKeys {
+		header.Add(key, value)	
+	}
+	sURL := fmt.Sprintf("%s/%s%s", conn.GetURL(), "<<.Command>>", <<.URLPostfix>>)
+	conn.GetLogger().Log(fmt.Sprintf("URL: %s, Command: %s", sURL, "<<.Method>>"))
+	
+	URL, err := url.Parse(sURL)
+	if err != nil {
+		return nil, err
+	}
+	<<CreateInputParamCode>>
+	
+	// Create web request
+	request := &http.Request{
+		Method:        "<<.Method>>",
+		URL:           URL,
+		Proto:         "HTTP/1.1",
+		ProtoMajor:    1,
+		ProtoMinor:    1,
+		Header:        header,
+		<<AssignRequestLength>>
+		<<AssignRequestBody>>
+		Host:          URL.Host}
+
+	return request, nil
+}
