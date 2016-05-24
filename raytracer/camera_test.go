@@ -8,6 +8,11 @@ import (
 	bhbosmanTest "github.com/bhbosman/golang/testing"
 )
 
+
+
+
+
+
 func TestCamera0001(t *testing.T) {
 	c := Camera{}
 	c.Init2(
