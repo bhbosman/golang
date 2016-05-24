@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/go-gl/mathgl/mgl64"
+	bhbosmanTest "github.com/bhbosman/golang/testing"
 )
 
 //	dotln := nUnit.Dot(lUnit)
@@ -90,6 +91,6 @@ func TestPhongLight002(t *testing.T) {
 	phongLight := PhongLight{}
 	value := phongLight.CalculateLight(pointOfInterest, lightSourcePosition, viewerPosition, light, data)
 
-	bhbTest := MyTestingT{t}
+	bhbTest := bhbosmanTest.MyTestingT{t}
 	bhbTest.CheckVector(mgl64.Vec3{0.08539199538899721, 0.08539199538899721, 0.08539199538899721}, value, "")
 }

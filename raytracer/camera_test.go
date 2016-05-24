@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/go-gl/mathgl/mgl64"
+	bhbosmanTest "github.com/bhbosman/golang/testing"
 )
 
 func TestCamera0001(t *testing.T) {
@@ -16,7 +17,7 @@ func TestCamera0001(t *testing.T) {
 		5.0,
 		4.0/3.0)
 
-	testCase := MyTestingT{t}
+	testCase := bhbosmanTest.MyTestingT{t}
 	testCase.CheckVector(mgl64.Vec3{-2.0, 1.5, 0.0}, c.TopLeft(), "TopLeft incorrect")
 	testCase.CheckVector(mgl64.Vec3{-2.0, -1.5, 0.0}, c.BottomLeft(), "BottomLeft incorrect")
 	testCase.CheckVector(mgl64.Vec3{2.0, 1.5, 0.0}, c.TopRight(), "TopRight incorrect")
@@ -36,7 +37,7 @@ func TestCamera0002(t *testing.T) {
 		5.0,
 		4.0/3.0)
 
-	testCase := MyTestingT{t}
+	testCase := bhbosmanTest.MyTestingT{t}
 	testCase.CheckVector(mgl64.Vec3{-12.0, 1.5, 0.0}, c.TopLeft(), "TopLeft incorrect")
 	testCase.CheckVector(mgl64.Vec3{-12.0, -1.5, 0.0}, c.BottomLeft(), "BottomLeft incorrect")
 	testCase.CheckVector(mgl64.Vec3{-8.0, 1.5, 0.0}, c.TopRight(), "TopRight")
@@ -56,7 +57,7 @@ func TestCamera0003(t *testing.T) {
 		5.0,
 		4.0/3.0)
 
-	testCase := MyTestingT{t}
+	testCase := bhbosmanTest.MyTestingT{t}
 	testCase.CheckVector(mgl64.Vec3{-12.0, 1.5, 0.0}, c.TopLeft(), "TopLeft incorrect")
 	testCase.CheckVector(mgl64.Vec3{-12.0, -1.5, 0.0}, c.BottomLeft(), "BottomLeft incorrect")
 	testCase.CheckVector(mgl64.Vec3{-8.0, 1.5, 0.0}, c.TopRight(), "TopRight")

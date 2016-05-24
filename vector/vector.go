@@ -25,7 +25,6 @@ func SpecularRefraction(n mgl64.Vec3, d mgl64.Vec3, n1 float64, n2 float64) (boo
 	return true, term01.Sub(term02)
 }
 
-
 // Transform ...
 func Transform(v mgl64.Vec3) mgl64.Mat4 {
 	ident := mgl64.Ident4()
