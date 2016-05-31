@@ -24,6 +24,18 @@
 			"program": "${workspaceRoot}/trading/ig/tools/igprotocolgenerator",
 			"env": {},
 			"args": []
+		},
+		{
+			"name": "WebService IG",
+			"type": "go",
+			"request": "launch",
+			"mode": "debug",
+			"remotePath": "",
+			"port": 2345,
+			"host": "127.0.0.1",
+			"program": "${workspaceRoot}/trading/ig/igwebservicerun",
+			"env": {},
+			"args": []
 		}
 	]
 }

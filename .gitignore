@@ -1,2 +1,5 @@
 raytracer/example/debug
 raytracer/example/*.jpg
+trading/ig/webserver/debug
+trading/ig/tools/igprotocolgenerator/debug
+trading/ig/webserver/debug
