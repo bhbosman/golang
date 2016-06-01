@@ -1,11 +1,11 @@
 package main
 
 import (
-	_ "github.com/bhbosman/golang/trading/ig/webserver/routers"
 	"github.com/astaxie/beego"
+	_ "github.com/bhbosman/golang/trading/ig/webserver/routers"
 )
 
 func main() {
 	beego.Run()
-}
 
+}

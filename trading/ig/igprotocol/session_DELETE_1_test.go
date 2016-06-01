@@ -3,11 +3,12 @@ package igprotocol
 import (
 	"testing"
 
-	testvariables "bitbucket.org/bhbosman/golangtradingig/igprotocol/test"
+	bhbosmanTesting "github.com/bhbosman/golang/testing"
+	testvariables "github.com/bhbosman/golang/trading/ig/igprotocol/test"
 )
 
 func TestSessionDeleteVersion2(t *testing.T) {
-	test := MyTestingT{t}
+	test := bhbosmanTesting.MyTestingT{t}
 
 	IGConnection := NewIGContextForTesting("", "", "", t)
 

@@ -2,7 +2,7 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Launch",
+			"name": "RayTracer",
 			"type": "go",
 			"request": "launch",
 			"mode": "debug",
@@ -33,7 +33,7 @@
 			"remotePath": "",
 			"port": 2345,
 			"host": "127.0.0.1",
-			"program": "${workspaceRoot}/trading/ig/igwebservicerun",
+			"program": "${workspaceRoot}/trading/ig/webserser",
 			"env": {},
 			"args": []
 		}

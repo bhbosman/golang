@@ -3,7 +3,7 @@ package processing
 import (
 	"image"
 
-	"github.com/bhbosman/golang-raytracer"
+	"github.com/bhbosman/golang/raytracer"
 )
 
 // ImageProcessor01 is the structure for the second processor

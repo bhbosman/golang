@@ -1,16 +1,16 @@
 package igprotocol
 
 import (
+	"encoding/json"
 	"fmt"
 	"testing"
-	"encoding/json"
-	 testvariables "bitbucket.org/bhbosman/golangtradingig/igprotocol/test" 
-	
 
+	bhbosmanTesting "github.com/bhbosman/golang/testing"
+	testvariables "github.com/bhbosman/golang/trading/ig/igprotocol/test"
 )
 
 func TestMarketNavigationAll(t *testing.T) {
-	test := MyTestingT{t}
+	test := bhbosmanTesting.MyTestingT{t}
 
 	ctx := NewIGContextForTesting(
 		testvariables.TestAccountIdentifier,
@@ -36,7 +36,7 @@ func TestMarketNavigationAll(t *testing.T) {
 }
 
 func TestMarketNavigationPerInstance(t *testing.T) {
-	test := MyTestingT{t}
+	test := bhbosmanTesting.MyTestingT{t}
 
 	ctx := NewIGContextForTesting(
 		testvariables.TestAccountIdentifier,
@@ -70,10 +70,8 @@ func TestMarketNavigationPerInstance(t *testing.T) {
 	}
 }
 
-
-
 func TestGetMarkets(t *testing.T) {
-	test := MyTestingT{t}
+	test := bhbosmanTesting.MyTestingT{t}
 
 	ctx := NewIGContextForTesting(
 		testvariables.TestAccountIdentifier,
@@ -92,6 +90,5 @@ func TestGetMarkets(t *testing.T) {
 
 	result, err := ctx.GetMarkets("", true)
 	t.Log(json.Marshal(result))
-	
-}
 
+}

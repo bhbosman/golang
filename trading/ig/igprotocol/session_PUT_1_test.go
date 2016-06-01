@@ -3,16 +3,17 @@ package igprotocol
 import (
 	"fmt"
 	"testing"
-	
-	testvariables "bitbucket.org/bhbosman/golangtradingig/igprotocol/test"
+
+	bhbosmanTesting "github.com/bhbosman/golang/testing"
+	testvariables "github.com/bhbosman/golang/trading/ig/igprotocol/test"
 )
 
 func TestSessionPutVersion1TryingToSwitchPreferredAccountNumber(t *testing.T) {
-	test := MyTestingT{t}
+	test := bhbosmanTesting.MyTestingT{t}
 
 	ctx := NewIGContextForTesting(
-		testvariables.TestAccountIdentifier, 
-		testvariables.TestAccountPassword, 
+		testvariables.TestAccountIdentifier,
+		testvariables.TestAccountPassword,
 		testvariables.TestAccountAPIKey, t)
 
 	_, err := ctx.Login()
@@ -35,16 +36,14 @@ func TestSessionPutVersion1TryingToSwitchPreferredAccountNumber(t *testing.T) {
 	test.CheckBool(err != nil, "Error must be assigned")
 }
 
-
 func TestSessionPutVersion1TryingToSwitchOtherAccountNumber(t *testing.T) {
-	test := MyTestingT{t}
+	test := bhbosmanTesting.MyTestingT{t}
 
 	ctx := NewIGContextForTesting(
-		testvariables.TestAccountIdentifier, 
-		testvariables.TestAccountPassword, 
-		testvariables.TestAccountAPIKey, 
+		testvariables.TestAccountIdentifier,
+		testvariables.TestAccountPassword,
+		testvariables.TestAccountAPIKey,
 		t)
-	
 
 	_, err := ctx.Login()
 	defer func() {
@@ -55,7 +54,7 @@ func TestSessionPutVersion1TryingToSwitchOtherAccountNumber(t *testing.T) {
 	accounts := ctx.GetNonDefaultAccountAccounts()
 
 	test.CheckBool(len(accounts) > 0, "Must have a non default account")
-	
+
 	acc := accounts[0]
 	result, err := ctx.AccountSwitch(acc.AccountID, true)
 	test.CheckBool(result.Header.Success, fmt.Sprintf("Must be Successfull(%s, %s)", result.Header.ErrorCode, result.Header.ErrorDescription))

@@ -2,10 +2,10 @@ package processing
 
 import (
 	"image"
-	"github.com/bhbosman/golang-raytracer"
+
+	"github.com/bhbosman/golang/raytracer"
 	"github.com/go-gl/mathgl/mgl64"
 )
-
 
 // ImageProcessor02PixelTask is a struct that describes the pixel that needs to be processed
 type ImageProcessor02PixelTask struct {
@@ -24,7 +24,7 @@ type ImageProcessor02ColorTask struct {
 type ImageProcessor02 struct {
 	ImageProcessor
 	picture *raytracer.Picture
-	scene *raytracer.Scene
+	scene   *raytracer.Scene
 }
 
 // CreateImageProcessor02 creates an instance of ImageProcessor02
@@ -77,7 +77,7 @@ func (ip ImageProcessor02) DealWithPixel(
 	doneTasks chan<- bool) {
 
 	for task := range pixelTasks {
-		r :=  ip.picture.RayAt(task.x, task.y)
+		r := ip.picture.RayAt(task.x, task.y)
 		b, c := ip.scene.RayIntersect(r)
 		if b {
 			colorTasks <- ImageProcessor02ColorTask{task.x, task.y, c}
