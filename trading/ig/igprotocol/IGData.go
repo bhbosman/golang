@@ -10,17 +10,26 @@ type IGData struct {
 // Login ...
 func (ctx *IGData) Login() (*AuthenticationResponseResult, error) {
 	result, err := ctx.ConnectionContext.login()
+	if err != nil {
+		ctx.ConnectionContext.Log.Logf("Error while logging in. Error: %s", err)
+		return nil, err
+	}
 	ctx.ConnectionInformation = result.Data
 	//
-	return result, err
+	return result, nil
 }
 
 // Logout ...
 func (ctx *IGData) Logout() (*LogoutResponseResult, error) {
 	result, err := ctx.ConnectionContext.logout()
+	if err != nil {
+		ctx.ConnectionContext.Log.Logf("Error while logging out. Error: %s", err)
+		return nil, err
+	}
+
 	ctx.ConnectionInformation = AuthenticationResponse{}
 	//
-	return result, err
+	return result, nil
 }
 
 // GetDefaultAccountAccount ...
@@ -66,7 +75,7 @@ func (ctx *IGData) GetMarkets(nodeID string, rescursive bool) ([]Market, error) 
 			if err != nil {
 				return make([]Market, 0, 0), err
 			}
-			for _,  market := range resurData {
+			for _, market := range resurData {
 				resultData = append(resultData, market)
 			}
 		}
@@ -74,11 +83,11 @@ func (ctx *IGData) GetMarkets(nodeID string, rescursive bool) ([]Market, error) 
 	for _, market := range result.Data.Markets {
 		resultData = append(resultData, market)
 	}
-    //
-    return resultData, nil
+	//
+	return resultData, nil
 }
 
 // SendMarketNavigationRequest ...
 func (ctx *IGData) SendMarketNavigationRequest(nodeID string) (*MarketNavigationResponseResult, error) {
-    return ctx.ConnectionContext.sendMarketNavigationRequest(nodeID)
+	return ctx.ConnectionContext.sendMarketNavigationRequest(nodeID)
 }

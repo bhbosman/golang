@@ -77,12 +77,12 @@ func (t *MyTestingT) CheckVector(expected, actual mgl64.Vec3, s string) {
 	t.CheckFloat64(expected.Z(), actual.Z(), fmt.Sprintf("%s Vector's Z differ", s))
 }
 
-// CheckErrorWithMessage ...
-func (t *MyTestingT) CheckErrorWithMessage(err error, s string) {
-	if err != nil {
-		t.Fatalf("%s: Error Message: %s", s, err)
-	}
-}
+// // CheckErrorWithMessage ...
+// func (t *MyTestingT) CheckErrorWithMessage(err error, s string) {
+// 	if err != nil {
+// 		t.Fatalf("%s: Error Message: %s", s, err)
+// 	}
+// }
 
 // CheckIntWithMessage ...
 func (t *MyTestingT) CheckIntWithMessage(actual int, expected int, s string) {

@@ -19,11 +19,15 @@ func TestMarketNavigationAll(t *testing.T) {
 		t)
 
 	_, err := ctx.Login()
-	test.CheckErrorWithMessage(err, "IG Context did not connect")
+	if err != nil {
+		t.Fatalf("IG Context did not connect. Error: %s", err)
+	}
 
 	defer func() {
 		_, err = ctx.Logout()
-		test.CheckErrorWithMessage(err, "IG Context did not disconnect")
+		if err != nil {
+			t.Fatalf("IG Context did not disconnect. Error: %s", err)
+		}
 	}()
 
 	keys := ctx.ConnectionContext.CreateConnectionContext()
@@ -31,7 +35,10 @@ func TestMarketNavigationAll(t *testing.T) {
 		&ctx.ConnectionContext,
 		MarketNavigationRequest{},
 		keys)
-	test.CheckErrorWithMessage(err, "A")
+	if err != nil {
+		t.Fatalf("A. Error: %s", err)
+	}
+
 	test.CheckBool(response.Header.Success, response.Header.ErrorCode)
 }
 
@@ -45,12 +52,15 @@ func TestMarketNavigationPerInstance(t *testing.T) {
 		t)
 
 	_, err := ctx.Login()
-	test.CheckErrorWithMessage(err, "IG Context did not connect")
+	if err != nil {
+		t.Fatalf("IG Context did not connect. Error: %s", err)
+	}
 
-	// Defer logout
 	defer func() {
 		_, err = ctx.Logout()
-		test.CheckErrorWithMessage(err, "IG Context did not disconnect")
+		if err != nil {
+			t.Fatalf("IG Context did not disconnect. Error: %s", err)
+		}
 	}()
 
 	result, err := ctx.SendMarketNavigationRequest("")
@@ -71,7 +81,6 @@ func TestMarketNavigationPerInstance(t *testing.T) {
 }
 
 func TestGetMarkets(t *testing.T) {
-	test := bhbosmanTesting.MyTestingT{T: t}
 
 	ctx := NewIGContextForTesting(
 		testvariables.TestAccountIdentifier,
@@ -80,15 +89,17 @@ func TestGetMarkets(t *testing.T) {
 		t)
 
 	_, err := ctx.Login()
-	test.CheckErrorWithMessage(err, "IG Context did not connect")
+	if err != nil {
+		t.Fatalf("IG Context did not connect. Error: %s", err)
+	}
 
-	// Defer logout
 	defer func() {
 		_, err = ctx.Logout()
-		test.CheckErrorWithMessage(err, "IG Context did not disconnect")
+		if err != nil {
+			t.Fatalf("IG Context did not disconnect. Error: %s", err)
+		}
 	}()
 
 	result, err := ctx.GetMarkets("", true)
 	t.Log(json.Marshal(result))
-
 }

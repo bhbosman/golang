@@ -17,11 +17,15 @@ func TestSessionPutVersion1TryingToSwitchPreferredAccountNumber(t *testing.T) {
 		testvariables.TestAccountAPIKey, t)
 
 	_, err := ctx.Login()
-	test.CheckErrorWithMessage(err, "IG Context did not connect")
+	if err != nil {
+		t.Fatalf("IG Context did not connect. Error: %s", err)
+	}
 
 	defer func() {
 		_, err = ctx.Logout()
-		test.CheckErrorWithMessage(err, "IG Context did not disconnect")
+		if err != nil {
+			t.Fatalf("IG Context did not disconnect. Error: %s", err)
+		}
 	}()
 
 	acc := ctx.GetDefaultAccountAccount()
@@ -46,11 +50,15 @@ func TestSessionPutVersion1TryingToSwitchOtherAccountNumber(t *testing.T) {
 		t)
 
 	_, err := ctx.Login()
+	if err != nil {
+		t.Fatalf("IG Context did not connect. Error: %s", err)
+	}
 	defer func() {
 		_, err = ctx.Logout()
-		test.CheckErrorWithMessage(err, "IG Context did not disconnect")
+		if err != nil {
+			t.Fatalf("IG Context did not disconnect. Error: %s", err)
+		}
 	}()
-	test.CheckErrorWithMessage(err, "IG Context did not connect")
 	accounts := ctx.GetNonDefaultAccountAccounts()
 
 	test.CheckBool(len(accounts) > 0, "Must have a non default account")

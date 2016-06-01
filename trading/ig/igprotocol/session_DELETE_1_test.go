@@ -21,7 +21,9 @@ func TestSessionDeleteVersion2(t *testing.T) {
 	keys[XIGApiKeyConst] = testvariables.TestAccountAPIKey
 
 	responseLogin, err := SendAuthenticationRequest(&IGConnection.ConnectionContext, credentials, keys)
-	test.CheckErrorWithMessage(err, "Error with SendAuthenticationRequest")
+	if err != nil {
+		t.Fatalf("Error with SendAuthenticationRequest. Error: %s", err)
+	}
 	test.CheckIntWithMessage(responseLogin.Header.StatusCode, 200, "StatusCode wrong")
 	test.CheckBool(responseLogin.Header.Success, "Not success")
 
@@ -31,8 +33,10 @@ func TestSessionDeleteVersion2(t *testing.T) {
 	keys[CstConst] = responseLogin.SessionKeys.CST
 
 	responseLogout, err := SendLogoutRequest(&IGConnection.ConnectionContext, keys)
+	if err != nil {
+		t.Fatalf("Error with SendLogoutRequest. Error: %s", err)
+	}
 
-	test.CheckErrorWithMessage(err, "Error with SendLogoutRequest")
 	test.CheckIntWithMessage(responseLogout.Header.StatusCode, 204, "StatusCode wrong")
 	test.CheckBool(responseLogout.Header.Success, "Not success")
 
