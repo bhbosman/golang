@@ -39,5 +39,4 @@ func TestSessionDeleteVersion2(t *testing.T) {
 
 	test.CheckIntWithMessage(responseLogout.Header.StatusCode, 204, "StatusCode wrong")
 	test.CheckBool(responseLogout.Header.Success, "Not success")
-
 }

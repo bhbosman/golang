@@ -24,6 +24,17 @@ func TestSessionPostVersion2(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error with SendAuthenticationRequest. Error: %s", err)
 	}
+
+	defer func() {
+		responseLogout, err := SendLogoutRequest(&IGConnection.ConnectionContext, keys)
+
+		if err != nil {
+			t.Fatalf("Error with SendLogoutRequest. Error: %s", err)
+		}
+		test.CheckIntWithMessage(responseLogout.Header.StatusCode, 204, "StatusCode wrong")
+		test.CheckBool(responseLogout.Header.Success, "Not success")
+	}()
+
 	test.CheckIntWithMessage(responseLogin.Header.StatusCode, 200, "StatusCode wrong")
 	test.CheckBool(responseLogin.Header.Success, "Not success")
 
@@ -31,12 +42,4 @@ func TestSessionPostVersion2(t *testing.T) {
 	keys[XIGApiKeyConst] = testvariables.TestAccountAPIKey
 	keys[XSecurityTokenConst] = responseLogin.SessionKeys.SecurityToken
 	keys[CstConst] = responseLogin.SessionKeys.CST
-
-	responseLogout, err := SendLogoutRequest(&IGConnection.ConnectionContext, keys)
-
-	if err != nil {
-		t.Fatalf("Error with SendLogoutRequest. Error: %s", err)
-	}
-	test.CheckIntWithMessage(responseLogout.Header.StatusCode, 204, "StatusCode wrong")
-	test.CheckBool(responseLogout.Header.Success, "Not success")
 }
