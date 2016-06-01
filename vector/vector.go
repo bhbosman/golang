@@ -1,8 +1,8 @@
 package raytracer
 
 import (
-	"fmt"
 	"math"
+
 	"github.com/go-gl/mathgl/mgl64"
 )
 
@@ -16,7 +16,6 @@ func SpecularRefraction(n mgl64.Vec3, d mgl64.Vec3, n1 float64, n2 float64) (boo
 	dn := d.Dot(n)
 	underSquare := 1.0 - math.Pow(n1, 2.0)/math.Pow(n2, 2.0)*(1.0-math.Pow(dn, 2))
 	if underSquare < 0.0 {
-		fmt.Println("zzz")
 		return false, mgl64.Vec3{0.0, 0.0, 0.0}
 	}
 	term01 := d.Sub(n.Mul(dn)).Mul(n1 / n2)

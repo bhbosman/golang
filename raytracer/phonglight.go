@@ -12,7 +12,11 @@ type PhongLight struct {
 }
 
 // CalculateLight ...
-func (pl PhongLight) CalculateLight(p, l, v mgl64.Vec3, light SceneLight, sceneObject SceneObjectLightCalculation) mgl64.Vec3 {
+func (pl PhongLight) CalculateLight(
+	p, l, v mgl64.Vec3,
+	light SceneLight,
+	sceneObject SceneObjectLightCalculation) mgl64.Vec3 {
+
 	nUnit := sceneObject.GetNormalAt(p)
 	m := sceneObject.GetMaterial(p)
 	vUnit := v.Sub(p).Normalize()
