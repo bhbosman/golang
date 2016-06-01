@@ -3,18 +3,13 @@ package raytracer
 import (
 	"math"
 
-	"github.com/go-gl/mathgl/mgl64"
 	bhbosmanVector "github.com/bhbosman/golang/vector"
+	"github.com/go-gl/mathgl/mgl64"
 )
 
 // PhongLight ...
 type PhongLight struct {
 }
-
-//	dotln := nUnit.Dot(lUnit)
-//	rUnit := nUnit.Mul(2.0 * dotln).Sub(lUnit)
-//
-
 
 // CalculateLight ...
 func (pl PhongLight) CalculateLight(p, l, v mgl64.Vec3, light SceneLight, sceneObject SceneObjectLightCalculation) mgl64.Vec3 {

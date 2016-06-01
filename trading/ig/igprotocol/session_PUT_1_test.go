@@ -9,7 +9,7 @@ import (
 )
 
 func TestSessionPutVersion1TryingToSwitchPreferredAccountNumber(t *testing.T) {
-	test := bhbosmanTesting.MyTestingT{t}
+	test := bhbosmanTesting.MyTestingT{T: t}
 
 	ctx := NewIGContextForTesting(
 		testvariables.TestAccountIdentifier,
@@ -37,7 +37,7 @@ func TestSessionPutVersion1TryingToSwitchPreferredAccountNumber(t *testing.T) {
 }
 
 func TestSessionPutVersion1TryingToSwitchOtherAccountNumber(t *testing.T) {
-	test := bhbosmanTesting.MyTestingT{t}
+	test := bhbosmanTesting.MyTestingT{T: t}
 
 	ctx := NewIGContextForTesting(
 		testvariables.TestAccountIdentifier,

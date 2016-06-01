@@ -1,7 +1,5 @@
 package raytracer
 
-// import "github.com/go-gl/mathgl/mgl64"
-
 // Picture struct represents a picture
 type Picture struct {
 	pixelWidth          int

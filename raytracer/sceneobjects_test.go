@@ -3,12 +3,12 @@ package raytracer
 import (
 	"testing"
 
-	"github.com/go-gl/mathgl/mgl64"
 	bhbosmanTest "github.com/bhbosman/golang/testing"
+	"github.com/go-gl/mathgl/mgl64"
 )
 
 func TestRayIntersectWithOldMechanism(t *testing.T) {
-	bhbTest := bhbosmanTest.MyTestingT{t}
+	bhbTest := bhbosmanTest.MyTestingT{T: t}
 
 	scene := CreateDefaultScene()
 

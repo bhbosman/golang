@@ -10,7 +10,7 @@ import (
 )
 
 func TestMarketNavigationAll(t *testing.T) {
-	test := bhbosmanTesting.MyTestingT{t}
+	test := bhbosmanTesting.MyTestingT{T: t}
 
 	ctx := NewIGContextForTesting(
 		testvariables.TestAccountIdentifier,
@@ -36,7 +36,7 @@ func TestMarketNavigationAll(t *testing.T) {
 }
 
 func TestMarketNavigationPerInstance(t *testing.T) {
-	test := bhbosmanTesting.MyTestingT{t}
+	test := bhbosmanTesting.MyTestingT{T: t}
 
 	ctx := NewIGContextForTesting(
 		testvariables.TestAccountIdentifier,
@@ -71,7 +71,7 @@ func TestMarketNavigationPerInstance(t *testing.T) {
 }
 
 func TestGetMarkets(t *testing.T) {
-	test := bhbosmanTesting.MyTestingT{t}
+	test := bhbosmanTesting.MyTestingT{T: t}
 
 	ctx := NewIGContextForTesting(
 		testvariables.TestAccountIdentifier,

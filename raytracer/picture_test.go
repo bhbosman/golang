@@ -2,10 +2,9 @@ package raytracer
 
 import (
 	"testing"
-	//"fmt"
 
-	"github.com/go-gl/mathgl/mgl64"
 	bhbosmanTest "github.com/bhbosman/golang/testing"
+	"github.com/go-gl/mathgl/mgl64"
 )
 
 func TestPicture00001(t *testing.T) {
@@ -21,7 +20,7 @@ func TestPicture00001(t *testing.T) {
 
 	r := p.RayAt(320, 240)
 
-	bhbTest := bhbosmanTest.MyTestingT{t}
+	bhbTest := bhbosmanTest.MyTestingT{T: t}
 	bhbTest.CheckVector(mgl64.Vec3{-2.0, 1.5, 0.0}, c.TopLeft(), "TopLeft incorrect")
 	bhbTest.CheckVector(mgl64.Vec3{-2.0, -1.5, 0.0}, c.BottomLeft(), "BottomLeft incorrect")
 	bhbTest.CheckVector(mgl64.Vec3{2.0, 1.5, 0.0}, c.TopRight(), "TopRight")
@@ -43,7 +42,6 @@ func TestPicture00002(t *testing.T) {
 		mgl64.Vec3{0.0, 0.0, -1.0}.Normalize(),
 		5.0,
 		4.0/3.0)
-		
 
 	p := CreatePicture(c, 640, 480)
 	r := p.RayAt(320, 240)
@@ -56,7 +54,7 @@ func TestPicture00002(t *testing.T) {
 		MaterialParams{}}
 	intersect, time := s.GetIntersect(r)
 
-	bhbtest := bhbosmanTest.MyTestingT{t}
+	bhbtest := bhbosmanTest.MyTestingT{T: t}
 	bhbtest.CheckVector(mgl64.Vec3{-2.0, 1.5, 0.0}, c.TopLeft(), "TopLeft incorrect")
 	bhbtest.CheckVector(mgl64.Vec3{-2.0, -1.5, 0.0}, c.BottomLeft(), "BottomLeft incorrect")
 	bhbtest.CheckVector(mgl64.Vec3{2.0, 1.5, 0.0}, c.TopRight(), "TopRight")

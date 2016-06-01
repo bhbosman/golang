@@ -3,13 +3,9 @@ package raytracer
 import (
 	"testing"
 
-	"github.com/go-gl/mathgl/mgl64"
 	bhbosmanTest "github.com/bhbosman/golang/testing"
+	"github.com/go-gl/mathgl/mgl64"
 )
-
-//	dotln := nUnit.Dot(lUnit)
-//	rUnit := nUnit.Mul(2.0 * dotln).Sub(lUnit)
-//
 
 type test_material struct {
 	color mgl64.Vec3
@@ -59,29 +55,17 @@ func (data TestSphereData) GetMaterial(p mgl64.Vec3) Material {
 	return sm
 }
 
-/*
-func (data TestSphereData) GetColor() mgl64.Vec3 {
-	return data.color
-}
-func (data TestSphereData) GetPa() float64 {
-	return data.pa
-}
-
-func (data TestSphereData) GetPs() float64 {
-	return data.ps
-}
-
-func (data TestSphereData) GetPd() float64 {
-	return data.pd
-}
-*/
 func TestPhongLight002(t *testing.T) {
 	f := 8.0
 	pointOfInterest := mgl64.Vec3{5, 5, 2}
 	lightSourcePosition := mgl64.Vec3{20, 7, 2}
 	viewerPosition := mgl64.Vec3{20, 0, 10}
 
-	light := PointLight{mgl64.Vec3{1, 1, 1}, lightSourcePosition, 1.0, f}
+	light := PointLight{
+		Color:    mgl64.Vec3{1, 1, 1},
+		Position: lightSourcePosition,
+		B:        1.0,
+		F:        f}
 	data := TestSphereData{}
 	data.n = mgl64.Vec3{0.928477, 0, 0.371391}
 	data.pa = 0.1
@@ -91,6 +75,6 @@ func TestPhongLight002(t *testing.T) {
 	phongLight := PhongLight{}
 	value := phongLight.CalculateLight(pointOfInterest, lightSourcePosition, viewerPosition, light, data)
 
-	bhbTest := bhbosmanTest.MyTestingT{t}
+	bhbTest := bhbosmanTest.MyTestingT{T: t}
 	bhbTest.CheckVector(mgl64.Vec3{0.08539199538899721, 0.08539199538899721, 0.08539199538899721}, value, "")
 }

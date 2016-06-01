@@ -8,7 +8,7 @@ import (
 )
 
 func TestSessionDeleteVersion2(t *testing.T) {
-	test := bhbosmanTesting.MyTestingT{t}
+	test := bhbosmanTesting.MyTestingT{T: t}
 
 	IGConnection := NewIGContextForTesting("", "", "", t)
 

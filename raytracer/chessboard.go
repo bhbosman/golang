@@ -6,9 +6,6 @@ import (
 	"github.com/go-gl/mathgl/mgl64"
 )
 
-
-
-
 // BlackAndWhiteChessBoard represent a Chessboard
 type BlackAndWhiteChessBoard struct {
 	Plane
@@ -22,6 +19,7 @@ type BlackAndWhiteChessBoard struct {
 func (p BlackAndWhiteChessBoard) Description() string {
 	return "BlackAndWhiteChessBoard"
 }
+
 // GetMaterial ...
 func (p BlackAndWhiteChessBoard) GetMaterial(point mgl64.Vec3) Material {
 	newPos := mgl64.TransformCoordinate(point, p.Transform)
@@ -32,18 +30,18 @@ func (p BlackAndWhiteChessBoard) GetMaterial(point mgl64.Vec3) Material {
 	r := (int(x + y)) % 2
 	if r == 1 {
 		return &MaterialParams{
-			Pa: 0,
-			Ps: 1,
-			Pd: 0.2,
+			Pa:    0,
+			Ps:    1,
+			Pd:    0.2,
 			Color: mgl64.Vec3{1, 1, 1}}
-	} else {
-		return &MaterialParams{
-			Pa: 0,
-			Ps: 1,
-			Pd: 0.2,
-			Color: mgl64.Vec3{0, 0, 0}}
 	}
+	return &MaterialParams{
+		Pa:    0,
+		Ps:    1,
+		Pd:    0.2,
+		Color: mgl64.Vec3{0, 0, 0}}
 }
+
 // Init ...
 func (p *BlackAndWhiteChessBoard) Init() {
 	p.Normal = p.Normal.Normalize()
@@ -53,4 +51,3 @@ func (p *BlackAndWhiteChessBoard) Init() {
 
 	//p.Rotate(mgl64.DegToRad(90), mgl64.Vec3{1,0,0})
 }
-

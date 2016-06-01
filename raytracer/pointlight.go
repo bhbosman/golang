@@ -1,6 +1,6 @@
 package raytracer
 
-import(
+import (
 	"github.com/go-gl/mathgl/mgl64"
 )
 
@@ -24,7 +24,6 @@ func (pointLight PointLight) GetPosition() mgl64.Vec3 {
 
 // GetColor ...
 func (pointLight PointLight) GetColor() mgl64.Vec3 {
-
 	return pointLight.Color
 }
 
