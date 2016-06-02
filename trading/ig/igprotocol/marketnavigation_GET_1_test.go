@@ -13,10 +13,11 @@ func TestMarketNavigationAll(t *testing.T) {
 	test := bhbosmanTesting.MyTestingT{T: t}
 
 	ctx := NewIGContextForTesting(
+		t,
+		testvariables.TestProxy,
 		testvariables.TestAccountIdentifier,
 		testvariables.TestAccountPassword,
-		testvariables.TestAccountAPIKey,
-		t)
+		testvariables.TestAccountAPIKey)
 
 	_, err := ctx.Login()
 	if err != nil {
@@ -46,10 +47,11 @@ func TestMarketNavigationPerInstance(t *testing.T) {
 	test := bhbosmanTesting.MyTestingT{T: t}
 
 	ctx := NewIGContextForTesting(
+		t,
+		testvariables.TestProxy,
 		testvariables.TestAccountIdentifier,
 		testvariables.TestAccountPassword,
-		testvariables.TestAccountAPIKey,
-		t)
+		testvariables.TestAccountAPIKey)
 
 	_, err := ctx.Login()
 	if err != nil {
@@ -83,10 +85,11 @@ func TestMarketNavigationPerInstance(t *testing.T) {
 func TestGetMarkets(t *testing.T) {
 
 	ctx := NewIGContextForTesting(
+		t,
+		testvariables.TestProxy,
 		testvariables.TestAccountIdentifier,
 		testvariables.TestAccountPassword,
-		testvariables.TestAccountAPIKey,
-		t)
+		testvariables.TestAccountAPIKey)
 
 	_, err := ctx.Login()
 	if err != nil {

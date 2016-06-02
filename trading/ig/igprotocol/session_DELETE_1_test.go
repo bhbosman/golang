@@ -10,7 +10,12 @@ import (
 func TestSessionDeleteVersion2(t *testing.T) {
 	test := bhbosmanTesting.MyTestingT{T: t}
 
-	IGConnection := NewIGContextForTesting("", "", "", t)
+	IGConnection := NewIGContextForTesting(
+		t,
+		testvariables.TestProxy,
+		"",
+		"",
+		"")
 
 	// Send logon
 	credentials := AuthenticationRequest{

@@ -12,9 +12,11 @@ func TestSessionPutVersion1TryingToSwitchPreferredAccountNumber(t *testing.T) {
 	test := bhbosmanTesting.MyTestingT{T: t}
 
 	ctx := NewIGContextForTesting(
+		t,
+		testvariables.TestProxy,
 		testvariables.TestAccountIdentifier,
 		testvariables.TestAccountPassword,
-		testvariables.TestAccountAPIKey, t)
+		testvariables.TestAccountAPIKey)
 
 	_, err := ctx.Login()
 	if err != nil {
@@ -44,10 +46,11 @@ func TestSessionPutVersion1TryingToSwitchOtherAccountNumber(t *testing.T) {
 	test := bhbosmanTesting.MyTestingT{T: t}
 
 	ctx := NewIGContextForTesting(
+		t,
+		testvariables.TestProxy,
 		testvariables.TestAccountIdentifier,
 		testvariables.TestAccountPassword,
-		testvariables.TestAccountAPIKey,
-		t)
+		testvariables.TestAccountAPIKey)
 
 	_, err := ctx.Login()
 	if err != nil {
