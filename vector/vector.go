@@ -1,4 +1,4 @@
-package raytracer
+package vector
 
 import (
 	"math"
