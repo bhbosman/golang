@@ -2,12 +2,11 @@ package processing
 
 import (
 	"fmt"
-	"math"
-	"os"
-
 	"image/color"
 	"image/draw"
 	"image/jpeg"
+	"math"
+	"os"
 
 	"github.com/go-gl/mathgl/mgl64"
 )
