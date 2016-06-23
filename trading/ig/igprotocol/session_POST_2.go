@@ -27,7 +27,7 @@ func SendAuthenticationRequest(
 	conn.GetLogger().Log("SendAuthenticationRequest start...")
 	defer conn.GetLogger().Log("SendAuthenticationRequest finished.")
 
-	request, err := CreateAuthenticationRequest(conn, inputData, headerKeys)
+	request, err := CreateAuthenticationRequest(conn.GetURL(), inputData, headerKeys)
 	if err != nil {
 		return nil, err
 	}
@@ -87,12 +87,14 @@ func SendAuthenticationRequest(
 }
 
 // CreateAuthenticationRequest ...
-func CreateAuthenticationRequest(conn IGConnection,
+func CreateAuthenticationRequest(
+	// conn IGConnection,
+	baseURL string,
 	inputData AuthenticationRequest,
 	headerKeys map[string]string) (*http.Request, error) {
 
-	conn.GetLogger().Log("Authentication start...")
-	defer conn.GetLogger().Log("Authentication finished.")
+	// conn.GetLogger().Log("Authentication start...")
+	// defer conn.GetLogger().Log("Authentication finished.")
 
 	header := http.Header{}
 	header.Add(ContentTypeConst, "application/json; charset=UTF-8")
@@ -102,8 +104,8 @@ func CreateAuthenticationRequest(conn IGConnection,
 	for key, value := range headerKeys {
 		header.Add(key, value)
 	}
-	sURL := fmt.Sprintf("%s/%s%s", conn.GetURL(), "session", "")
-	conn.GetLogger().Log(fmt.Sprintf("URL: %s, Command: %s", sURL, "POST"))
+	sURL := fmt.Sprintf("%s/%s%s", baseURL, "session", "")
+	// conn.GetLogger().Log(fmt.Sprintf("URL: %s, Command: %s", sURL, "POST"))
 
 	URL, err := url.Parse(sURL)
 	if err != nil {
