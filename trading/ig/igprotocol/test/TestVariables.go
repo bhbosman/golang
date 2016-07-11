@@ -10,4 +10,9 @@ const TestAccountPassword = "bhb4noQW"
 const TestAccountAPIKey = "201b00b0db6528ec2b6d99feb8bb223d70b7d9e3"
 
 // TestProxy ...
-const TestProxy = "https://10.112.145.3:8080"
+const TestProxy = ""
+
+// const TestProxy = "https://10.112.145.3:8080"
+
+// TestDemoAPI ...
+const TestDemoAPI = "https://demo-api.ig.com/gateway/deal"

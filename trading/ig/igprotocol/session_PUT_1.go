@@ -27,7 +27,7 @@ func SendAccountSwitchRequest(
 	conn.GetLogger().Log("SendAccountSwitchRequest start...")
 	defer conn.GetLogger().Log("SendAccountSwitchRequest finished.")
 
-	request, err := CreateAccountSwitchRequest(conn, inputData, headerKeys)
+	request, err := CreateAccountSwitchRequest(conn.GetURL(), inputData, headerKeys)
 	if err != nil {
 		return nil, err
 	}
@@ -83,12 +83,12 @@ func SendAccountSwitchRequest(
 }
 
 // CreateAccountSwitchRequest ...
-func CreateAccountSwitchRequest(conn IGConnection,
+func CreateAccountSwitchRequest(BaseURL string,
 	inputData AccountSwitchRequest,
 	headerKeys map[string]string) (*http.Request, error) {
 
-	conn.GetLogger().Log("AccountSwitch start...")
-	defer conn.GetLogger().Log("AccountSwitch finished.")
+	// conn.GetLogger().Log("AccountSwitch start...")
+	// defer conn.GetLogger().Log("AccountSwitch finished.")
 
 	header := http.Header{}
 	header.Add(ContentTypeConst, "application/json; charset=UTF-8")
@@ -98,8 +98,8 @@ func CreateAccountSwitchRequest(conn IGConnection,
 	for key, value := range headerKeys {
 		header.Add(key, value)
 	}
-	sURL := fmt.Sprintf("%s/%s%s", conn.GetURL(), "session", "")
-	conn.GetLogger().Log(fmt.Sprintf("URL: %s, Command: %s", sURL, "PUT"))
+	sURL := fmt.Sprintf("%s/%s%s", BaseURL, "session", "")
+	// conn.GetLogger().Log(fmt.Sprintf("URL: %s, Command: %s", sURL, "PUT"))
 
 	URL, err := url.Parse(sURL)
 	if err != nil {

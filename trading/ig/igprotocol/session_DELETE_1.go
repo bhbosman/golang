@@ -26,7 +26,7 @@ func SendLogoutRequest(
 	conn.GetLogger().Log("SendLogoutRequest start...")
 	defer conn.GetLogger().Log("SendLogoutRequest finished.")
 
-	request, err := CreateLogoutRequest(conn, headerKeys)
+	request, err := CreateLogoutRequest(conn.GetURL(), headerKeys)
 	if err != nil {
 		return nil, err
 	}
@@ -82,11 +82,11 @@ func SendLogoutRequest(
 }
 
 // CreateLogoutRequest ...
-func CreateLogoutRequest(conn IGConnection,
+func CreateLogoutRequest(BaseURL string,
 	headerKeys map[string]string) (*http.Request, error) {
 
-	conn.GetLogger().Log("Logout start...")
-	defer conn.GetLogger().Log("Logout finished.")
+	// conn.GetLogger().Log("Logout start...")
+	// defer conn.GetLogger().Log("Logout finished.")
 
 	header := http.Header{}
 	header.Add(ContentTypeConst, "application/json; charset=UTF-8")
@@ -96,8 +96,8 @@ func CreateLogoutRequest(conn IGConnection,
 	for key, value := range headerKeys {
 		header.Add(key, value)
 	}
-	sURL := fmt.Sprintf("%s/%s%s", conn.GetURL(), "session", "")
-	conn.GetLogger().Log(fmt.Sprintf("URL: %s, Command: %s", sURL, "DELETE"))
+	sURL := fmt.Sprintf("%s/%s%s", BaseURL, "session", "")
+	// conn.GetLogger().Log(fmt.Sprintf("URL: %s, Command: %s", sURL, "DELETE"))
 
 	URL, err := url.Parse(sURL)
 	if err != nil {

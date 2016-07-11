@@ -1,6 +1,6 @@
-raytracer/example/debug
+debug
+debug.test
+
 raytracer/example/*.jpg
-trading/ig/webserver/debug
-trading/ig/tools/igprotocolgenerator/debug
 .DS_Store
-raytracer/debug.test
+

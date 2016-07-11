@@ -27,7 +27,7 @@ func SendMarketNavigationRequest(
 	conn.GetLogger().Log("SendMarketNavigationRequest start...")
 	defer conn.GetLogger().Log("SendMarketNavigationRequest finished.")
 
-	request, err := CreateMarketNavigationRequest(conn, inputData, headerKeys)
+	request, err := CreateMarketNavigationRequest(conn.GetURL(), inputData, headerKeys)
 	if err != nil {
 		return nil, err
 	}
@@ -83,12 +83,12 @@ func SendMarketNavigationRequest(
 }
 
 // CreateMarketNavigationRequest ...
-func CreateMarketNavigationRequest(conn IGConnection,
+func CreateMarketNavigationRequest(BaseURL string,
 	inputData MarketNavigationRequest,
 	headerKeys map[string]string) (*http.Request, error) {
 
-	conn.GetLogger().Log("MarketNavigation start...")
-	defer conn.GetLogger().Log("MarketNavigation finished.")
+	// conn.GetLogger().Log("MarketNavigation start...")
+	// defer conn.GetLogger().Log("MarketNavigation finished.")
 
 	header := http.Header{}
 	header.Add(ContentTypeConst, "application/json; charset=UTF-8")
@@ -98,8 +98,9 @@ func CreateMarketNavigationRequest(conn IGConnection,
 	for key, value := range headerKeys {
 		header.Add(key, value)
 	}
-	sURL := fmt.Sprintf("%s/%s%s", conn.GetURL(), "marketnavigation", inputData.URLPostFix())
-	conn.GetLogger().Log(fmt.Sprintf("URL: %s, Command: %s", sURL, "GET"))
+
+	sURL := fmt.Sprintf("%s/%s%s", BaseURL, "marketnavigation", inputData.URLPostFix())
+	// conn.GetLogger().Log(fmt.Sprintf("URL: %s, Command: %s", sURL, "GET"))
 
 	URL, err := url.Parse(sURL)
 	if err != nil {
