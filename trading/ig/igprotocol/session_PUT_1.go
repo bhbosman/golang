@@ -38,34 +38,24 @@ func SendAccountSwitchRequest(
 	}
 	defer response.Body.Close()
 
+	return CreateAccountSwitchResponse(response)
+
+}
+
+// CreateAccountSwitchRequest ...
+func CreateAccountSwitchResponse(response *http.Response) (*AccountSwitchResponseResult, error) {
+
 	ResultData := AccountSwitchResponse{}
 
-	var bodyBytes []byte
-	var jsonData []byte
+	//var bodyBytes []byte
+	//var jsonData []byte
 	if response.ContentLength != 0 {
-		if conn.GetLogger().GetLogEnabled() {
-			bodyBytes, err = ioutil.ReadAll(response.Body)
-			if err != nil {
-				return nil, err
-			}
-			byteReader := bytes.NewReader(bodyBytes)
-			jsonEncoder := json.NewDecoder(byteReader)
-			err = jsonEncoder.Decode(&ResultData)
-			if err != nil {
-				return nil, err
-			}
-			jsonData, _ = json.Marshal(ResultData)
-		} else {
-			jsonEncoder := json.NewDecoder(response.Body)
-			err = jsonEncoder.Decode(&ResultData)
-			if err != nil {
-				return nil, err
-			}
+		jsonEncoder := json.NewDecoder(response.Body)
+		err := jsonEncoder.Decode(&ResultData)
+		if err != nil {
+			return nil, err
 		}
 	}
-	conn.GetLogger().Logf("Raw data received: %s", bodyBytes)
-	conn.GetLogger().Logf("Translated data received: %s", jsonData)
-
 	ResultHeader := HTTPResponseHeader{
 		SecurityToken:    response.Header.Get("X-SECURITY-TOKEN"),
 		Success:          response.StatusCode == 200,
@@ -86,10 +76,6 @@ func SendAccountSwitchRequest(
 func CreateAccountSwitchRequest(BaseURL string,
 	inputData AccountSwitchRequest,
 	headerKeys map[string]string) (*http.Request, error) {
-
-	// conn.GetLogger().Log("AccountSwitch start...")
-	// defer conn.GetLogger().Log("AccountSwitch finished.")
-
 	header := http.Header{}
 	header.Add(ContentTypeConst, "application/json; charset=UTF-8")
 	header.Add(AcceptConst, "application/json; charset=UTF-8")

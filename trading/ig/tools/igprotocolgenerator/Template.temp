@@ -40,37 +40,27 @@ func Send<<.StructName>>Request(
 	}
 	<<CloseResponseBody>>
 
-	<<CreateSessionParam>>
+	return Create<<.StructName>>Response(response)
+
+	
+}
+
+
+// Create<<.StructName>>Request ...
+func Create<<.StructName>>Response(response *http.Response) (*<<.StructName>>ResponseResult, <<KeepResponseBodyAlive>>error) {
+<<CreateSessionParam>>
 	
 	ResultData := <<.StructName>>Response{}
 
-	var bodyBytes []byte
-	var jsonData []byte
+	//var bodyBytes []byte
+	//var jsonData []byte
 	if response.ContentLength != 0 {
-		if conn.GetLogger().GetLogEnabled() {
-			bodyBytes, err = ioutil.ReadAll(response.Body)
-			if err != nil {
-				return nil, err
-			}
-			byteReader := bytes.NewReader(bodyBytes)
-			jsonEncoder := json.NewDecoder(byteReader)
-			err = jsonEncoder.Decode(&ResultData)
-			if err != nil {
-				return nil, err
-			}
-			jsonData, _ = json.Marshal(ResultData)	
-		} else {
 			jsonEncoder := json.NewDecoder(response.Body)
-			err = jsonEncoder.Decode(&ResultData)
+			err := jsonEncoder.Decode(&ResultData)
 			if err != nil {
 				return nil, err
-			}
 		}
 	}
-	conn.GetLogger().Logf("Raw data received: %s", bodyBytes)
-	conn.GetLogger().Logf("Translated data received: %s", jsonData)
-
-	
 	ResultHeader := HTTPResponseHeader{
 		SecurityToken:    response.Header.Get("X-SECURITY-TOKEN"),
 		Success:          response.StatusCode == <<.ResponseParams.SuccessCode>>,
@@ -90,10 +80,6 @@ func Send<<.StructName>>Request(
 // Create<<.StructName>>Request ...
 func Create<<.StructName>>Request(BaseURL string,<<CreateReaderParam>>
 	headerKeys map[string]string) (*http.Request, error) {
-	
-	// conn.GetLogger().Log("<<.StructName>> start...")
-	// defer conn.GetLogger().Log("<<.StructName>> finished.")
-	
 	header := http.Header{}
 	header.Add(ContentTypeConst, "application/json; charset=UTF-8")
 	header.Add(AcceptConst, "application/json; charset=UTF-8")

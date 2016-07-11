@@ -32,10 +32,6 @@ func main() {
 		return
 	}
 
-	igprotocol.
-
-	dd.Write(buffer)
-
-	fmt.Println(buffer)
+	AuthResponse, _ := igprotocol.CreateAuthenticationResponse(dd)
 
 }
