@@ -36,31 +36,6 @@
 			"program": "${workspaceRoot}/trading/ig/webserver",
 			"env": {},
 			"args": []
-		},
-		{
-			"name": "socket",
-			"type": "go",
-			"request": "launch",
-			"mode": "debug",
-			"remotePath": "",
-			"port": 2345,
-			"host": "127.0.0.1",
-			"program": "${workspaceRoot}/socket/main",
-			"env": {},
-			"args": []
-		}
-		,
-		{
-			"name": "sssss",
-			"type": "go",
-			"request": "launch",
-			"mode": "debug",
-			"remotePath": "",
-			"port": 2345,
-			"host": "127.0.0.1",
-			"program": "${workspaceRoot}/ssss/main",
-			"env": {},
-			"args": []
-		}
+		}		
 	]
 }
