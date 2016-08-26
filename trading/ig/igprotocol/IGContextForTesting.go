@@ -6,6 +6,17 @@ import (
 	"testing"
 )
 
+func newClient(proxy string) *http.Client {
+	if proxy != "" {
+		proxyURL, _ := url.Parse(proxy)
+		return &http.Client{
+			Transport: &http.Transport{
+				Proxy: http.ProxyURL(proxyURL)}}
+	}
+	//
+	return &http.Client{}
+}
+
 // NewIGContextForTesting ...
 func NewIGContextForTesting(
 	t *testing.T,
@@ -15,16 +26,6 @@ func NewIGContextForTesting(
 	APIKey string) *IGData {
 
 	var connection *http.Client
-
-	if proxy != "" {
-		proxyURL, _ := url.Parse(proxy)
-		connection = &http.Client{
-			Transport: &http.Transport{
-				Proxy: http.ProxyURL(proxyURL)}}
-
-	} else {
-		connection = &http.Client{}
-	}
 
 	return &IGData{
 		ConnectionInformation: AuthenticationResponse{},

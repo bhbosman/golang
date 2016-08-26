@@ -25,10 +25,14 @@ func Send<<.StructName>>Request(
 	
 	conn.GetLogger().Log("Send<<.StructName>>Request start...")
 	defer conn.GetLogger().Log("Send<<.StructName>>Request finished.")
+<<<<<<< HEAD
 	
 	
 	
 		
+=======
+
+>>>>>>> c5edc2c235e03e96eb62b8b363b9f703b3f9c8de
 	request, err := Create<<.StructName>>Request(conn.GetURL(), <<UseInputParamBytes>>headerKeys)
 	if err != nil {
 		return nil, err
@@ -78,8 +82,19 @@ func Create<<.StructName>>Response(response *http.Response) (*<<.StructName>>Res
 }
 
 // Create<<.StructName>>Request ...
+<<<<<<< HEAD
 func Create<<.StructName>>Request(BaseURL string,<<CreateReaderParam>>
 	headerKeys map[string]string) (*http.Request, error) {
+=======
+func Create<<.StructName>>Request(
+	// conn IGConnection,
+	baseURL string, <<CreateReaderParam>>
+	headerKeys map[string]string) (*http.Request, error) {
+	
+	// conn.GetLogger().Log("<<.StructName>> start...")
+	// defer conn.GetLogger().Log("<<.StructName>> finished.")
+	
+>>>>>>> c5edc2c235e03e96eb62b8b363b9f703b3f9c8de
 	header := http.Header{}
 	header.Add(ContentTypeConst, "application/json; charset=UTF-8")
 	header.Add(AcceptConst, "application/json; charset=UTF-8")
@@ -88,7 +103,11 @@ func Create<<.StructName>>Request(BaseURL string,<<CreateReaderParam>>
 	for key, value := range headerKeys {
 		header.Add(key, value)	
 	}
+<<<<<<< HEAD
 	sURL := fmt.Sprintf("%s/%s%s", BaseURL, "<<.Command>>", <<.URLPostfix>>)
+=======
+	sURL := fmt.Sprintf("%s/%s%s", baseURL, "<<.Command>>", <<.URLPostfix>>)
+>>>>>>> c5edc2c235e03e96eb62b8b363b9f703b3f9c8de
 	// conn.GetLogger().Log(fmt.Sprintf("URL: %s, Command: %s", sURL, "<<.Method>>"))
 	
 	URL, err := url.Parse(sURL)
