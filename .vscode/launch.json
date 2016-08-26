@@ -36,6 +36,38 @@
 			"program": "${workspaceRoot}/trading/ig/webserver",
 			"env": {},
 			"args": []
+<<<<<<< HEAD
 		}		
+=======
+		},
+		{
+			"name": "LS",
+			"type": "go",
+			"request": "launch",
+			"mode": "debug",
+			"remotePath": "",
+			"port": 2345,
+			"host": "127.0.0.1",
+			"program": "${workspaceRoot}/lightstream/main",
+			"env": {},
+			"args": []
+		},
+		{
+			"name": "euler",
+			"type": "go",
+			"request": "launch",
+			"mode": "debug",
+			"remotePath": "",
+			"port": 2345,
+			"host": "127.0.0.1",
+			"program": "${workspaceRoot}/eulerproject/main",
+			"env": {},
+			"args": []
+
+
+
+		}
+
+>>>>>>> c5edc2c235e03e96eb62b8b363b9f703b3f9c8de
 	]
 }
