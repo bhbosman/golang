@@ -1,4 +1,4 @@
-package solutions
+package sol001
 
 import (
 	"testing"

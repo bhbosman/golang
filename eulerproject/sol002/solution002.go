@@ -1,4 +1,4 @@
-package solutions
+package sol002
 
 // Fibonacci ...
 func Fibonacci(number int) int {

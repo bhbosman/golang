@@ -1,4 +1,4 @@
-package solutions
+package sol001
 
 // Multiplesof3and5 ...
 func Multiplesof3and5(number int) int {

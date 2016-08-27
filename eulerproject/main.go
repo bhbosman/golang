@@ -1,14 +1,10 @@
 package main
 
-import (
-	"fmt"
-
-	"github.com/bhbosman/golang/eulerproject/solutions"
-)
+import "github.com/bhbosman/golang/eulerproject/sol004"
 
 func main() {
-	fmt.Print(solutions.Multiplesof3and5(1000))
-	for index := 1; index <= 10; index++ {
-		fmt.Println(solutions.Fibonacci(index))
-	}
+
+	// fmt.Println(sol003.LargestPrimeFactor(600851475143))
+	sol004.FindPalindrome()
+
 }

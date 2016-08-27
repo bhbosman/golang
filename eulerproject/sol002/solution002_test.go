@@ -1,4 +1,4 @@
-package solutions
+package sol002
 
 import "testing"
 
@@ -20,5 +20,4 @@ func TestSolution02(t *testing.T) {
 	if sum != 4613732 {
 		t.Fatal("")
 	}
-
 }

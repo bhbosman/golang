@@ -36,9 +36,7 @@
 			"program": "${workspaceRoot}/trading/ig/webserver",
 			"env": {},
 			"args": []
-<<<<<<< HEAD
-		}		
-=======
+
 		},
 		{
 			"name": "LS",
@@ -63,11 +61,6 @@
 			"program": "${workspaceRoot}/eulerproject/main",
 			"env": {},
 			"args": []
-
-
-
 		}
-
->>>>>>> c5edc2c235e03e96eb62b8b363b9f703b3f9c8de
 	]
 }
