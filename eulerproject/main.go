@@ -7,8 +7,6 @@ import (
 )
 
 func main() {
-
 	n := sol006.Number6(100)
 	fmt.Println(n)
-
 }
