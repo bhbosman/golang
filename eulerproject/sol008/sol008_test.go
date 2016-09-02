@@ -33,7 +33,7 @@ var strData = ("73167176531330624919225119674426574742355349194934" +
 
 func getData() []byte {
 
-	n := 1
+	n := 100
 	intData := make([]byte, 0, n*1000)
 	for i := 1; i <= n; i++ {
 		for _, r := range strData {
@@ -46,7 +46,7 @@ func getData() []byte {
 	return intData
 }
 
-func TestSolution06_01(t *testing.T) {
+func TestSolution08_01(t *testing.T) {
 	largest := int64(math.MinInt64)
 	intData := getData()
 
@@ -63,10 +63,7 @@ func TestSolution06_01(t *testing.T) {
 		}
 		rans := int64(0)
 
-		removeCan := false
-		if i-lastZero-backTrack >= 0 {
-			removeCan = true
-		}
+		removeCan := (i-lastZero-backTrack >= 0)
 
 		if remove != 0 {
 			if removeCan {
@@ -93,7 +90,7 @@ func TestSolution06_01(t *testing.T) {
 	fmt.Println(largest)
 }
 
-func TestSolution06_02(t *testing.T) {
+func TestSolution08_02(t *testing.T) {
 	backTrack := 13
 	largest := int64(math.MinInt64)
 	acc := int64(1)
@@ -101,7 +98,7 @@ func TestSolution06_02(t *testing.T) {
 
 	intData := getData()
 
-	values := make([]byte, backTrack, backTrack)
+	values := []byte{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 
 	for i, v := range intData {
 		if consumed < backTrack {
@@ -111,7 +108,7 @@ func TestSolution06_02(t *testing.T) {
 		}
 
 		values[i%backTrack] = v
-		acc *= int64(values[i%backTrack])
+		acc *= int64(v)
 
 		if acc > largest && consumed == backTrack {
 			largest = acc
