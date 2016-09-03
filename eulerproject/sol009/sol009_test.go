@@ -1,11 +1,11 @@
 package sol009
 
 import (
-	"encoding/binary"
 	"fmt"
 	"math"
-	"math/big"
 	"testing"
+
+	bhb_math_big "github.com/bhbosman/golang/math/big"
 )
 
 //
@@ -19,8 +19,10 @@ func TestSolution09_01(t *testing.T) {
 	sumOfLength := 1000
 	minLenghtOfA := int((sumOfLength - 3) / 3)
 	finished := false
-
 	beginValue := 1
+	ansA := 0
+	ansB := 0
+	ansC := 0
 	for aa, a, jumpaa := beginValue*beginValue, beginValue, 2*beginValue+1; !finished && a <= minLenghtOfA; aa, a, jumpaa = aa+jumpaa, a+1, jumpaa+2 {
 		for bb, b, jumpbb := aa+jumpaa, a+1, 2*(a+1)+1; !finished && a+b+b+1 <= sumOfLength; bb, b, jumpbb = bb+jumpbb, b+1, jumpbb+2 {
 			c := sumOfLength - b - a
@@ -28,38 +30,20 @@ func TestSolution09_01(t *testing.T) {
 			if aa+bb == cc {
 				// finished = true
 				fmt.Println(a, b, c, a*b*c)
+				ansA = a
+				ansB = b
+				ansC = c
 			}
 		}
+	}
+	if ansA != 200 || ansB != 375 || ansC != 425 {
+		t.Fatal("wrong")
 	}
 }
 
 //
 // Given solution
 //
-func gcd(a, b uint64) *big.Int {
-	buffer := make([]byte, 8, 8)
-
-	binary.LittleEndian.PutUint64(buffer, uint64(a))
-	bigIntA := &big.Int{}
-	bigIntA.SetBytes(buffer)
-
-	binary.LittleEndian.PutUint64(buffer, uint64(b))
-	bigIntB := &big.Int{}
-	bigIntB.SetBytes(buffer)
-
-	gcd := bigIntA.GCD(nil, nil, bigIntA, bigIntB)
-	return gcd
-}
-
-func compare(gcd *big.Int, b uint64) bool {
-
-	buffer := make([]byte, 8, 8)
-	binary.LittleEndian.PutUint64(buffer, uint64(b))
-	bigIntB := &big.Int{}
-	bigIntB.SetBytes(buffer)
-
-	return gcd.Cmp(bigIntB) == 0
-}
 
 func TestSolution09_02(t *testing.T) {
 	s := 1000
@@ -80,7 +64,7 @@ func TestSolution09_02(t *testing.T) {
 				k = m + 1
 			}
 			for k < 2*m && k <= sm {
-				if sm%k == 0 && compare(gcd(uint64(k), uint64(m)), 1) {
+				if sm%k == 0 && bhb_math_big.CompareGCD(bhb_math_big.CalculateGCD(uint64(k), uint64(m)), 1) {
 					d := s2 / (k * m)
 					n := k - m
 					a := d * (m*m - n*n)
