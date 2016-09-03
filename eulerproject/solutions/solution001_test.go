@@ -1,4 +1,8 @@
-package sol001
+package solutions
+
+import (
+	"testing"
+)
 
 // Multiplesof3and5 ...
 func Multiplesof3and5(number int) int {
@@ -13,4 +17,12 @@ func Multiplesof3and5(number int) int {
 		}
 	}
 	return result
+}
+
+// https://projecteuler.net/problem=1
+func TestSolution01(t *testing.T) {
+	ans := Multiplesof3and5(1000)
+	if ans != 233168 {
+		t.Fatal("")
+	}
 }

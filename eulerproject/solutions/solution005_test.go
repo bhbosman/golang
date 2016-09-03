@@ -1,6 +1,7 @@
-package sol005
+package solutions
 
 import "testing"
+import bhb_math "github.com/bhbosman/golang/math"
 
 //
 // https://projecteuler.net/problem=5
@@ -8,7 +9,7 @@ import "testing"
 
 func TestSolution05(t *testing.T) {
 
-	n := MinumumDivisibleNumber(
+	n := bhb_math.MinumumDivisibleNumber(
 		[]int{
 			1, 2, 3, 4, 5,
 			6, 7, 8, 9, 10,

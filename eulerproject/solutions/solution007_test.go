@@ -1,8 +1,10 @@
-package sol007
+package solutions
 
 import (
 	"fmt"
 	"testing"
+
+	bhb_math "github.com/bhbosman/golang/math"
 )
 
 //
@@ -11,7 +13,7 @@ import (
 
 func TestSolution06(t *testing.T) {
 
-	data := AtkinsSievePrime(104743)
+	data := bhb_math.AtkinsSievePrime(104743)
 	if len(data) >= 10001 {
 		fmt.Println(data[10000])
 	} else {

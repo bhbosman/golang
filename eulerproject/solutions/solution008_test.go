@@ -1,4 +1,4 @@
-package sol008
+package solutions
 
 import (
 	"fmt"

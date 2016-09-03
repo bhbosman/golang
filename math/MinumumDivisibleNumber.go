@@ -1,4 +1,4 @@
-package sol005
+package math
 
 import "sort"
 
