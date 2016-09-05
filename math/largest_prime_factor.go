@@ -3,7 +3,6 @@ package math
 import "math"
 
 func LargestPrimeFactor(number uint64) uint64 {
-
 	lastFactor := uint64(1)
 	if number%2 == 0 {
 		lastFactor = 2
