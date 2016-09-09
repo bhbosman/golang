@@ -12,7 +12,6 @@ import (
 //
 
 func TestSolution13_01(t *testing.T) {
-
 	bigNumbers, longest, _ := readFileData("solution013_data.txt")
 	revAnswer := make([]byte, 0, len(bigNumbers))
 	overflow := 0
@@ -31,13 +30,13 @@ func TestSolution13_01(t *testing.T) {
 		ans[len(ans)-i-1] = b
 	}
 	TheAnswer := strconv.Itoa(overflow) + string(ans)
+
 	if TheAnswer != "5537376230390876637302048746832985971773659831892672" {
 		t.Fail()
 	}
 }
 
 func TestSolution13_02(t *testing.T) {
-
 	bigNumbers, _, _ := readFileData("solution013_data.txt")
 	sum := big.NewInt(0)
 	for _, line := range bigNumbers {
