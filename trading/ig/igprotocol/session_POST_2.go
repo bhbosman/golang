@@ -26,7 +26,6 @@ func SendAuthenticationRequest(
 
 	conn.GetLogger().Log("SendAuthenticationRequest start...")
 	defer conn.GetLogger().Log("SendAuthenticationRequest finished.")
-
 	request, err := CreateAuthenticationRequest(conn.GetURL(), inputData, headerKeys)
 	if err != nil {
 		return nil, err
@@ -76,11 +75,6 @@ func CreateAuthenticationResponse(response *http.Response) (*AuthenticationRespo
 }
 
 // CreateAuthenticationRequest ...
-<<<<<<< HEAD
-func CreateAuthenticationRequest(BaseURL string,
-	inputData AuthenticationRequest,
-	headerKeys map[string]string) (*http.Request, error) {
-=======
 func CreateAuthenticationRequest(
 	// conn IGConnection,
 	baseURL string,
@@ -90,7 +84,6 @@ func CreateAuthenticationRequest(
 	// conn.GetLogger().Log("Authentication start...")
 	// defer conn.GetLogger().Log("Authentication finished.")
 
->>>>>>> c5edc2c235e03e96eb62b8b363b9f703b3f9c8de
 	header := http.Header{}
 	header.Add(ContentTypeConst, "application/json; charset=UTF-8")
 	header.Add(AcceptConst, "application/json; charset=UTF-8")
@@ -99,11 +92,7 @@ func CreateAuthenticationRequest(
 	for key, value := range headerKeys {
 		header.Add(key, value)
 	}
-<<<<<<< HEAD
-	sURL := fmt.Sprintf("%s/%s%s", BaseURL, "session", "")
-=======
 	sURL := fmt.Sprintf("%s/%s%s", baseURL, "session", "")
->>>>>>> c5edc2c235e03e96eb62b8b363b9f703b3f9c8de
 	// conn.GetLogger().Log(fmt.Sprintf("URL: %s, Command: %s", sURL, "POST"))
 
 	URL, err := url.Parse(sURL)
