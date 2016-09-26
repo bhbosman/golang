@@ -7,16 +7,7 @@ import (
 	bhb_math "github.com/bhbosman/golang/math"
 )
 
-//
-// https://projecteuler.net/problem=21
-//
-
-
-
-
-
-
-func TestSolution21_01(t *testing.T) {
+func TestSolution22_01(t *testing.T) {
 	d := make(map[int]int)
 	number := 10000
 	primes := bhb_math.AtkinsSievePrime(uint64(number))
