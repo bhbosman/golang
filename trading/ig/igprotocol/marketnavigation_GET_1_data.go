@@ -4,30 +4,32 @@ import (
 	"fmt"
 )
 
+// Node ...
 type Node struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`
 }
 
+// Market ...
 type Market struct {
-	bid                      int    `json:"bid"`
-	delayTime                int    `json:"delayTime"`
-	epic                     string `json:"epic"`
-	expiry                   string `json:"expiry"`
-	high                     int    `json:"high"`
-	instrumentName           string `json:"instrumentName"`
-	instrumentType           string `json:"instrumentType"`
-	lotSize                  int    `json:"lotSize"`
-	low                      int    `json:"low"`
-	marketStatus             string `json:"marketStatus"`
-	netChange                int    `json:"netChange"`
-	offer                    int    `json:"offer"`
-	otcTradeable             bool   `json:"otcTradeable"`
-	percentageChange         int    `json:"percentageChange"`
-	scalingFactor            int    `json:"scalingFactor"`
-	streamingPricesAvailable bool   `json:"streamingPricesAvailable"`
-	updateTime               string `json:"updateTime"`
-	updateTimeUTC            string `json:"updateTimeUTC"`
+	Bid                      int    `json:"bid"`
+	DelayTime                int    `json:"delayTime"`
+	Epic                     string `json:"epic"`
+	Expiry                   string `json:"expiry"`
+	High                     int    `json:"high"`
+	InstrumentName           string `json:"instrumentName"`
+	InstrumentType           string `json:"instrumentType"`
+	LotSize                  int    `json:"lotSize"`
+	Low                      int    `json:"low"`
+	MarketStatus             string `json:"marketStatus"`
+	NetChange                int    `json:"netChange"`
+	Offer                    int    `json:"offer"`
+	OtcTradeable             bool   `json:"otcTradeable"`
+	PercentageChange         int    `json:"percentageChange"`
+	ScalingFactor            int    `json:"scalingFactor"`
+	StreamingPricesAvailable bool   `json:"streamingPricesAvailable"`
+	UpdateTime               string `json:"updateTime"`
+	UpdateTimeUTC            string `json:"updateTimeUTC"`
 }
 
 // MarketNavigationResponse ...
@@ -42,9 +44,10 @@ type MarketNavigationRequest struct {
 	NodeID string `json:"nodeId"`
 }
 
-func (self MarketNavigationRequest) URLPostFix() string {
-	if self.NodeID != "" {
-		return fmt.Sprintf("/%s", self.NodeID)
+// URLPostFix ...
+func (request MarketNavigationRequest) URLPostFix() string {
+	if request.NodeID != "" {
+		return fmt.Sprintf("/%s", request.NodeID)
 	}
 	return ""
 }
