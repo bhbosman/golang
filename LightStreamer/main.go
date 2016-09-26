@@ -127,13 +127,12 @@ func (ctx *LSContext) ActiveUser() string {
 
 func (ctx *LSContext) ConnectToLS() (igprotocol.HTTPResponseHeader, error) {
 	sURL := fmt.Sprintf("%s/%s", ctx.AuthenticationResponse.LightStreamerEndpoint, "lightstreamer/create_session.txt")
-
 	URL, _ := url.Parse(sURL)
 	q := url.Values{}
 	q.Set("LS_op2", "create")
 	q.Set("LS_adapter_set", "DEFAULT")
 	q.Set("LS_cid", "mgQkwtwdysogQz2BJ4Ji kOj2Bg")
-	// q.Set("LS_user", ctx.ActiveUser())
+	q.Set("LS_user", ctx.ActiveUser())
 	q.Set("LS_password", fmt.Sprintf("CST-%s|XST-%s", ctx.SessionKeys.CST, ctx.SessionKeys.SecurityToken))
 
 	byteBuffer := bytes.NewBufferString(q.Encode())
@@ -158,15 +157,13 @@ func (ctx *LSContext) ConnectToLS() (igprotocol.HTTPResponseHeader, error) {
 		request,
 		func(response *http.Response) (igprotocol.HTTPResponseHeader, error) {
 			fmt.Println(response)
-			fmt.Println(response.ContentLength)
-			if response.ContentLength != 0 {
-
-				b, _ := ioutil.ReadAll(response.Body)
-				s := string(b)
-
-				fmt.Println(s)
-			}
-
+			fmt.Println(response.Header)
+			// fmt.Println(response.ContentLength)
+			// if response.ContentLength != 0 {
+			// 	b, _ := ioutil.ReadAll(response.Body)
+			// 	s := string(b)
+			// 	fmt.Println(s)
+			// }
 			ResultHeader := igprotocol.HTTPResponseHeader{
 				SecurityToken: response.Header.Get("X-SECURITY-TOKEN"),
 				Success:       response.StatusCode == 200,
@@ -204,5 +201,4 @@ func main() {
 	if err != nil {
 		fmt.Printf("Error with connect. Error: %s\n", err)
 	}
-
 }
