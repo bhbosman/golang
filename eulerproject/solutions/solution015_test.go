@@ -40,17 +40,6 @@ func TestSolution15_01(t *testing.T) {
 	fmt.Println(data.do(0, 0, 0))
 }
 
-type Coordinate struct {
-	x int
-	y int
-}
-
-func (c Coordinate) sum(a, b Coordinate) Coordinate {
-	return Coordinate{
-		x: a.x + b.x,
-		y: a.y + b.y}
-}
-
 type Problem15Data02 struct {
 	sizeX int
 	sizeY int
@@ -83,7 +72,7 @@ func (data *Problem15Data02) iterate(input map[Coordinate]int) map[Coordinate]in
 
 	for c, v := range input {
 		for _, d := range directions {
-			s := c.sum(c, d)
+			s := c.Sum(c, d)
 
 			if data.inRange(s) {
 				_, ok := result[s]
