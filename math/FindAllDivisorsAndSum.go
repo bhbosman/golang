@@ -1,24 +1,24 @@
 package math
 
-func FindAllDivisorsAndSum(number int, data []int) ([]int, int) {
+// FindAllDivisorsAndSum ...
+// Param:
+//		data: lis for all the primes that make makes up a number
+func FindAllDivisorsAndSum(data []int) []int {
 	divisors := make(map[int]int)
 	divisors[1] = 0
-
-	checkAndAdd := func(value int, temp map[int]int) {
-		if value != number {
+	for _, v := range data {
+		temp := make(map[int]int)
+		checkAndAdd := func(value int) {
 			_, ok := divisors[int(value)]
 			if !ok {
 				temp[value] = 0
 			}
 		}
-	}
-	for _, v := range data {
-		temp := make(map[int]int)
 
 		for k := range divisors {
-			checkAndAdd(k*v, temp)
+			checkAndAdd(k * v)
 		}
-		checkAndAdd(v, temp)
+		checkAndAdd(v)
 		for k := range temp {
 			divisors[k] = 0
 		}
@@ -29,5 +29,5 @@ func FindAllDivisorsAndSum(number int, data []int) ([]int, int) {
 		result = append(result, k)
 		sum += k
 	}
-	return result, sum
+	return result
 }

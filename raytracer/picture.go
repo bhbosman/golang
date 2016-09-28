@@ -12,11 +12,11 @@ type Picture struct {
 // CreatePicture creates a Picture object
 func CreatePicture(camera *Camera, width int, height int) *Picture {
 	p := &Picture{
-		width,
-		height,
-		camera.GetWidth() / float64(width),
-		camera.GetHeight() / float64(height),
-		camera}
+		pixelWidth:          width,
+		pixelHeight:         height,
+		pixelWidthDistance:  camera.GetWidth() / float64(width),
+		pixelHeightDistance: camera.GetHeight() / float64(height),
+		camera:              camera}
 
 	return p
 }
@@ -27,7 +27,11 @@ func (p *Picture) RayAt(x, y int) Ray {
 	deltaY := p.camera.direction.y.Mul(float64(y) * p.pixelHeightDistance)
 	o := p.camera.plane.topLeft.Add(deltaX).Sub(deltaY)
 	r := o.Sub(p.camera.viewPoint).Normalize()
-	return Ray{o, r, x, y}
+	return Ray{
+		Origin:    o,
+		Direction: r,
+		x:         x,
+		y:         y}
 }
 
 // GetWidth returns the pixel width of the picture

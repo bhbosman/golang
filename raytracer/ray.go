@@ -15,10 +15,10 @@ type Ray struct {
 // NewRay ...
 func NewRay(Origin mgl64.Vec3, Direction mgl64.Vec3, x int, y int, bias float64) Ray {
 	return Ray{
-		Origin.Add(Direction.Mul(bias)),
-		Direction,
-		x,
-		y}
+		Origin:    Origin.Add(Direction.Mul(bias)),
+		Direction: Direction,
+		x:         x,
+		y:         y}
 }
 
 // PositionAt ...
