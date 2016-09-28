@@ -1,9 +1,6 @@
 package solutions
 
-import (
-	"fmt"
-	"testing"
-)
+import "testing"
 
 func TestSolution19_01(t *testing.T) {
 	leapYear := func(year int) bool {
@@ -33,5 +30,7 @@ func TestSolution19_01(t *testing.T) {
 			}
 		}
 	}
-	fmt.Println(count, days)
+	if 171 != days {
+		t.Fail()
+	}
 }

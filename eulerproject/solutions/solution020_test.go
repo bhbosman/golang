@@ -1,7 +1,6 @@
 package solutions
 
 import (
-	"fmt"
 	"math/big"
 	"testing"
 )
@@ -26,13 +25,12 @@ func TestSolution20_01(t *testing.T) {
 	for i := 1; i <= 100; i++ {
 		n := dd(i)
 		s = n.String()
-		fmt.Println(i, n)
 	}
-	fmt.Println(s)
-
 	sum := 0
 	for _, r := range s {
 		sum += int(r - '0')
 	}
-	fmt.Println(sum)
+	if 648 != sum {
+		t.Fail()
+	}
 }

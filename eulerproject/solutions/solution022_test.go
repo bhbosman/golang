@@ -1,44 +1,42 @@
 package solutions
 
 import (
-	"fmt"
+	"encoding/csv"
+	"os"
+	"sort"
 	"testing"
-
-	bhb_math "github.com/bhbosman/golang/math"
 )
 
-func TestSolution22_01(t *testing.T) {
-	d := make(map[int]int)
-	number := 10000
-	primes := bhb_math.AtkinsSievePrime(uint64(number))
-	for index := 1; index <= number; index++ {
-		data := bhb_math.FindPrimeDivisors(primes, index)
-		flat := bhb_math.FindPrimeDivisorsMakeFlat(data)
-		_, sum := bhb_math.FindAllDivisorsAndSum(index, flat)
-		// fmt.Println(index, data, flat, divisors, sum)
-		d[index] = sum
-	}
-	result := make(map[int]int)
-	addToResult := func(number int) {
-		_, ok := result[number]
-		if !ok {
-			result[number] = 0
-		}
-	}
+//
+// https://projecteuler.net/problem=22
+//
 
-	for k, v := range d {
-		_, ok := d[v]
-		if ok {
-			if k == d[v] && k != v {
-				addToResult(k)
-				addToResult(v)
-			}
+func TestSolution22_01(t *testing.T) {
+	file, err := os.Open("solution022_names.txt")
+	if err != nil {
+		t.Error(err)
+	}
+	defer file.Close()
+
+	reader := csv.NewReader(file)
+	data, err := reader.Read()
+	if err != nil {
+		t.Error(err)
+	}
+	sort.Strings(data)
+
+	NameScore := func(name string) int {
+		sum := 0
+		for _, v := range name {
+			sum += int(1 + v - 'A')
 		}
+		return sum
 	}
 	sum := 0
-	for k := range result {
-		sum += k
-
+	for i, v := range data {
+		sum += ((i + 1) * NameScore(v))
 	}
-	fmt.Println(result, sum, sum/2)
+	if 871198282 != sum {
+		t.Fail()
+	}
 }
