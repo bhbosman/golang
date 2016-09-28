@@ -7,30 +7,30 @@ import (
 	"github.com/go-gl/mathgl/mgl64"
 )
 
-type test_material struct {
+type testMaterial struct {
 	color mgl64.Vec3
 	pa    float64
 	pd    float64
 	ps    float64
 }
 
-func (sm test_material) GetColor() mgl64.Vec3 {
+func (sm testMaterial) GetColor() mgl64.Vec3 {
 	return sm.color
 }
 
-func (sm test_material) GetPa() float64 {
+func (sm testMaterial) GetPa() float64 {
 	return sm.pa
 }
 
-func (sm test_material) GetPs() float64 {
+func (sm testMaterial) GetPs() float64 {
 	return sm.ps
 }
 
-func (sm test_material) GetPd() float64 {
+func (sm testMaterial) GetPd() float64 {
 	return sm.pd
 }
 
-func (sm test_material) GetRefraction() float64 {
+func (sm testMaterial) GetRefraction() float64 {
 	return 0.0
 }
 
@@ -51,7 +51,11 @@ func (data TestSphereData) GetNormalAt(point mgl64.Vec3) mgl64.Vec3 {
 }
 
 func (data TestSphereData) GetMaterial(p mgl64.Vec3) Material {
-	sm := &test_material{data.color, data.pa, data.pd, data.ps}
+	sm := &testMaterial{
+		color: data.color,
+		pa:    data.pa,
+		pd:    data.pd,
+		ps:    data.ps}
 	return sm
 }
 

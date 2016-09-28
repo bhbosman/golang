@@ -1,7 +1,6 @@
 package solutions
 
 import (
-	"fmt"
 	"testing"
 
 	bhb_math "github.com/bhbosman/golang/math"
@@ -11,11 +10,6 @@ import (
 // https://projecteuler.net/problem=21
 //
 
-
-
-
-
-
 func TestSolution21_01(t *testing.T) {
 	d := make(map[int]int)
 	number := 10000
@@ -23,8 +17,13 @@ func TestSolution21_01(t *testing.T) {
 	for index := 1; index <= number; index++ {
 		data := bhb_math.FindPrimeDivisors(primes, index)
 		flat := bhb_math.FindPrimeDivisorsMakeFlat(data)
-		_, sum := bhb_math.FindAllDivisorsAndSum(index, flat)
-		// fmt.Println(index, data, flat, divisors, sum)
+		divisors := bhb_math.FindAllDivisorsAndSum(flat)
+		sum := 0
+		for _, d := range divisors {
+			if d != index {
+				sum += d
+			}
+		}
 		d[index] = sum
 	}
 	result := make(map[int]int)
@@ -49,5 +48,7 @@ func TestSolution21_01(t *testing.T) {
 		sum += k
 
 	}
-	fmt.Println(result, sum, sum/2)
+	if sum != 31626 {
+		t.Fatal("wrong")
+	}
 }

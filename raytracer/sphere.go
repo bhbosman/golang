@@ -18,13 +18,13 @@ func (s Sphere) GetIntersect(r Ray) (TIntersection, float64) {
 }
 
 // Rotate ...
-func (s *Sphere) Rotate(angle float64, axis mgl64.Vec3){
+func (s *Sphere) Rotate(angle float64, axis mgl64.Vec3) {
 	rot := mgl64.HomogRotate3D(angle, axis)
 	s.Origin = rot.Mul4x1(s.Origin.Vec4(1)).Vec3()
 }
 
 // calculateIntersection ...
-func (s Sphere) calculateIntersection(r Ray)(TIntersection, float64){
+func (s Sphere) calculateIntersection(r Ray) (TIntersection, float64) {
 	L := s.Origin.Sub(r.Origin)
 	tca := L.Dot(r.Direction)
 	if tca < 0 {
@@ -42,9 +42,8 @@ func (s Sphere) calculateIntersection(r Ray)(TIntersection, float64){
 	i2 := tca + thc
 	if i1 < 0.0 {
 		return wiInside, i2
-	} else {
-		return wiOutSide, i1
 	}
+	return wiOutSide, i1
 }
 
 // GetNormalAt ...
