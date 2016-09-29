@@ -1,9 +1,9 @@
 package solutions
 
 import (
-	"fmt"
 	"testing"
 
+	"github.com/Workiva/go-datastructures/bitarray"
 	bhb_math "github.com/bhbosman/golang/math"
 )
 
@@ -62,9 +62,37 @@ func TestSolution23_01(t *testing.T) {
 			return sum, what
 		}
 	}
-	calculateNumberDescription := calculateNumberDescriptionClosure(100000)
-	for index := 1; index <= 50; index++ {
-		sum, what := calculateNumberDescription(index)
-		fmt.Println(index, sum, what)
+	number := 28124
+	calculateNumberDescription := calculateNumberDescriptionClosure(number)
+	abundantNumbers := make([]int, 0, 10000)
+	for i := 1; i <= number; i++ {
+		_, whatI := calculateNumberDescription(i)
+		if whatI == AbundantNumber {
+			abundantNumbers = append(abundantNumbers, i)
+		}
+	}
+	numbersNotTouched := bitarray.NewBitArray(uint64(number), true)
+	for i := uint64(number); i < numbersNotTouched.Capacity(); i++ {
+		numbersNotTouched.ClearBit(i)
+	}
+	for i, v1 := range abundantNumbers {
+		for k := i; k < len(abundantNumbers); k++ {
+			v2 := abundantNumbers[k]
+			sum := v1 + v2
+			if sum < number {
+				numbersNotTouched.ClearBit(uint64(sum))
+			}
+			if sum >= number {
+				break
+			}
+		}
+	}
+	sum := uint64(0)
+	values := numbersNotTouched.ToNums()
+	for _, v := range values {
+		sum += v
+	}
+	if sum != 4179871 {
+		t.Fail()
 	}
 }
