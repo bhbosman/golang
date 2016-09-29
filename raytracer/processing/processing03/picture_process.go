@@ -43,6 +43,7 @@ func CreateImageProcessor(p *raytracer.Picture, s *raytracer.Scene) ImageProcess
 	return result
 }
 
+// Workers ...
 const Workers = 8
 
 // Process generates the image
