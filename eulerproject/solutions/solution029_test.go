@@ -1,0 +1,121 @@
+package solutions
+
+import (
+	"fmt"
+	"math"
+	"sort"
+	"testing"
+)
+
+import bhb_math "github.com/bhbosman/golang/math"
+
+//
+// https://projecteuler.net/problem=27
+//
+
+func Pow(a, b int) int {
+	p := 1
+	for b > 0 {
+		if b&1 != 0 {
+			p *= a
+		}
+		b >>= 1
+		a *= a
+	}
+	return p
+}
+
+// func pow(a, b int64) int64 {
+// 	result := int64(1)
+// 	for i := int64(1); i <= b; i++ {
+// 		result = result * a
+// 	}
+// 	return result
+// }
+
+type AB struct {
+	a, b int
+}
+
+func TestSolution29_01(t *testing.T) {
+	primes := bhb_math.AtkinsSievePrime(uint64(100000))
+
+	bruteForce := func(a, b int) []int {
+		data := make(map[int]int)
+		for i := a; i <= b; i++ {
+			for k := a; k <= b; k++ {
+				value := Pow(i, k)
+				if _, ok := data[value]; !ok {
+					data[value] = 0
+				}
+			}
+		}
+		result := make([]int, 0, len(data))
+		for key := range data {
+			result = append(result, key)
+		}
+		sort.Ints(result)
+		return result
+	}
+	run3 := func(minValue, maxValue int) []int {
+		result := make([]int, 0, Pow(maxValue-minValue+1, 2))
+		mainExclusionList := make(map[AB]int)
+		between := func(value int) bool {
+			return minValue <= value && value <= maxValue
+		}
+
+		dealWithIteration := func(excl map[AB]int, a, b int) {
+			primedataForBValue := bhb_math.FindPrimeDivisors(primes, b)
+			primesFlatForBValue := bhb_math.FindPrimeDivisorsMakeFlat(primedataForBValue)
+			divsB := bhb_math.FindAllDivisorsAndSum(primesFlatForBValue)
+			// fmt.Println(a, b, divsB)
+			for _, valueB := range divsB {
+				i, k := Pow(a, valueB), b/valueB
+				if between(i) && between(k) {
+					mapdata := AB{a: i, b: k}
+					if _, ok := excl[mapdata]; !ok {
+						excl[mapdata] = 0
+					}
+				}
+			}
+		}
+		for i := minValue; i <= maxValue; i++ {
+			for k := minValue; k <= maxValue; k++ {
+				iterPoint := AB{a: i, b: k}
+				if _, ok := mainExclusionList[iterPoint]; !ok {
+					//Pow(i, p) <= Pow(maxValue, maxValue)
+
+					for p := 1; math.Pow(float64(i), float64(p)/float64(maxValue)) <= float64(maxValue); p++ {
+						value := Pow(Pow(i, p), k)
+						iterExclusionList := make(map[AB]int)
+						dealWithIteration(iterExclusionList, i, k*p)
+						added := false
+						for key := range iterExclusionList {
+							if _, ok := mainExclusionList[key]; !ok {
+								mainExclusionList[key] = 0
+								added = true
+							}
+						}
+						if added {
+							result = append(result, value)
+						}
+					}
+				}
+			}
+		}
+		sort.Ints(result)
+		return result
+	}
+
+	valueA := 2
+	valueB := 15
+
+	// fmt.Println(run1(valueA, valueB))
+
+	print := func(values []int) {
+		fmt.Println(len(values), values)
+	}
+
+	print(run3(valueA, valueB))
+	print(bruteForce(valueA, valueB))
+}
