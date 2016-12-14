@@ -9,7 +9,7 @@ import (
 import bhb_math "github.com/bhbosman/golang/math"
 
 //
-// https://projecteuler.net/problem=27
+// https://projecteuler.net/problem=29s
 //
 
 func Pow(a, b int) int {
@@ -24,14 +24,6 @@ func Pow(a, b int) int {
 	return p
 }
 
-// func pow(a, b int64) int64 {
-// 	result := int64(1)
-// 	for i := int64(1); i <= b; i++ {
-// 		result = result * a
-// 	}
-// 	return result
-// }
-
 type AB struct {
 	a, b int
 }
@@ -39,23 +31,6 @@ type AB struct {
 func TestSolution29_01(t *testing.T) {
 	primes := bhb_math.AtkinsSievePrime(uint64(100000))
 
-	// bruteForce := func(a, b int) []int {
-	// 	data := make(map[int]int)
-	// 	for i := a; i <= b; i++ {
-	// 		for k := a; k <= b; k++ {
-	// 			value := Pow(i, k)
-	// 			if _, ok := data[value]; !ok {
-	// 				data[value] = 0
-	// 			}
-	// 		}
-	// 	}
-	// 	result := make([]int, 0, len(data))
-	// 	for key := range data {
-	// 		result = append(result, key)
-	// 	}
-	// 	sort.Ints(result)
-	// 	return result
-	// }
 	run3 := func(minValue, maxValue int) int {
 		// result := make([]int, 0, Pow(maxValue-minValue+1, 2))
 		result := 0
@@ -228,5 +203,5 @@ func TestSolution29_03(t *testing.T) {
 	}
 	init()
 	run()
-	fmt.Println(combinations, len(combinations))
+	// fmt.Println(combinations, len(combinations))
 }
