@@ -36,8 +36,6 @@ func TestSolution31_01(t *testing.T) {
 var coins = []int{200, 100, 50, 20, 10, 5, 2, 1}
 
 func findposs(money int, maxcoin int) int {
-	fmt.Println(coins[maxcoin])
-
 	sum := 0
 	if maxcoin == 7 {
 		return 1
@@ -53,6 +51,6 @@ func findposs(money int, maxcoin int) int {
 }
 
 func TestSolution31_02(t *testing.T) {
-	fmt.Println(findposs(200, 0))
+	fmt.Println(findposs(10, 0))
 
 }
