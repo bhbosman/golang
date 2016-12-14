@@ -164,7 +164,6 @@ func TestSolution29_03(t *testing.T) {
 	minValue := 2
 	maxValue := 100
 	combinations := make(map[AB]int)
-
 	init := func() {
 		for a := minValue; a <= maxValue; a++ {
 			for b := minValue; b <= maxValue; b++ {
@@ -172,25 +171,19 @@ func TestSolution29_03(t *testing.T) {
 			}
 		}
 	}
-	findDuplicates := func(inputA, inputB int) {
-		for iter := minValue; iter <= maxValue; iter++ {
-			number := inputB * iter
-			for d := 1; d < inputB; d++ {
-				if number%d == 0 {
-					a := number / d
-					b := Pow(inputA, d)
-
-					entry := AB{a: a, b: b}
-					delete(combinations, entry)
-
+	run := func() {
+		findDuplicates := func(inputA, inputB int) {
+			for iter := minValue; iter <= maxValue; iter++ {
+				number := inputB * iter
+				for d := 1; d < inputB; d++ {
+					if number%d == 0 {
+						a := number / d
+						b := Pow(inputA, d)
+						delete(combinations, AB{a: a, b: b})
+					}
 				}
 			}
-
 		}
-
-	}
-
-	run := func() {
 		for a := minValue; a <= maxValue; a++ {
 			for b := minValue; b <= maxValue; b++ {
 				c := Pow(a, b)
@@ -203,5 +196,5 @@ func TestSolution29_03(t *testing.T) {
 	}
 	init()
 	run()
-	// fmt.Println(combinations, len(combinations))
+	fmt.Println(combinations, len(combinations))
 }
