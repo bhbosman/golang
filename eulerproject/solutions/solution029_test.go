@@ -3,7 +3,6 @@ package solutions
 import (
 	"fmt"
 	"math"
-	"sort"
 	"testing"
 )
 
@@ -40,25 +39,26 @@ type AB struct {
 func TestSolution29_01(t *testing.T) {
 	primes := bhb_math.AtkinsSievePrime(uint64(100000))
 
-	bruteForce := func(a, b int) []int {
-		data := make(map[int]int)
-		for i := a; i <= b; i++ {
-			for k := a; k <= b; k++ {
-				value := Pow(i, k)
-				if _, ok := data[value]; !ok {
-					data[value] = 0
-				}
-			}
-		}
-		result := make([]int, 0, len(data))
-		for key := range data {
-			result = append(result, key)
-		}
-		sort.Ints(result)
-		return result
-	}
-	run3 := func(minValue, maxValue int) []int {
-		result := make([]int, 0, Pow(maxValue-minValue+1, 2))
+	// bruteForce := func(a, b int) []int {
+	// 	data := make(map[int]int)
+	// 	for i := a; i <= b; i++ {
+	// 		for k := a; k <= b; k++ {
+	// 			value := Pow(i, k)
+	// 			if _, ok := data[value]; !ok {
+	// 				data[value] = 0
+	// 			}
+	// 		}
+	// 	}
+	// 	result := make([]int, 0, len(data))
+	// 	for key := range data {
+	// 		result = append(result, key)
+	// 	}
+	// 	sort.Ints(result)
+	// 	return result
+	// }
+	run3 := func(minValue, maxValue int) int {
+		// result := make([]int, 0, Pow(maxValue-minValue+1, 2))
+		result := 0
 		mainExclusionList := make(map[AB]int)
 		between := func(value int) bool {
 			return minValue <= value && value <= maxValue
@@ -86,7 +86,7 @@ func TestSolution29_01(t *testing.T) {
 					//Pow(i, p) <= Pow(maxValue, maxValue)
 
 					for p := 1; math.Pow(float64(i), float64(p)/float64(maxValue)) <= float64(maxValue); p++ {
-						value := Pow(Pow(i, p), k)
+						// value := Pow(Pow(i, p), k)
 						iterExclusionList := make(map[AB]int)
 						dealWithIteration(iterExclusionList, i, k*p)
 						added := false
@@ -97,25 +97,93 @@ func TestSolution29_01(t *testing.T) {
 							}
 						}
 						if added {
-							result = append(result, value)
+							result++
 						}
 					}
 				}
 			}
 		}
-		sort.Ints(result)
+		// sort.Ints(result)
 		return result
 	}
 
 	valueA := 2
-	valueB := 15
+	valueB := 100
 
 	// fmt.Println(run1(valueA, valueB))
 
-	print := func(values []int) {
-		fmt.Println(len(values), values)
+	print := func(values int) {
+		fmt.Println(values)
 	}
 
 	print(run3(valueA, valueB))
-	print(bruteForce(valueA, valueB))
+	// print(bruteForce(valueA, valueB))
+}
+func TestSolution29_02(t *testing.T) {
+	// minValue := 2
+	// maxValue := 100
+	max := 100
+
+	init := func() [][]bool {
+		duplicates := make([][]bool, max, max)
+		for index := range duplicates {
+			entry := make([]bool, max, max)
+			duplicates[index] = entry
+		}
+		return duplicates
+	}
+
+	duplicates := init()
+
+	mark_duplicates := func(a1 int, b1 int) {
+		for b2 := 2; b2 <= max; b2++ {
+			b3 := b1 * b2
+			for f1 := 1; f1 < b1; f1++ {
+				if b3%f1 == 0 {
+					f2 := b3 / f1
+					a2 := Pow(a1, f1)
+					if a2 <= max {
+						if f2 <= max {
+							duplicates[a2-1][f2-1] = true
+						}
+					}
+				}
+			}
+		}
+	}
+
+	sweep := func(a int) {
+		for b := 2; b <= max; b++ {
+			c := Pow(a, b)
+			if c > max {
+				break
+			}
+			mark_duplicates(a, b)
+		}
+	}
+
+	count_nondups := func() int {
+		count := 0
+		for a := 2; a <= max; a++ {
+			for b := 2; b <= max; b++ {
+				if !duplicates[a-1][b-1] {
+					count++
+				}
+			}
+		}
+
+		return count
+	}
+
+	//fmt.Println(duplicates)
+
+	for a := 2; a <= max; a++ {
+		sweep(a)
+	}
+
+	fmt.Println(count_nondups())
+
+}
+
+func TestSolution29_03(t *testing.T) {
 }
