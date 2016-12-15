@@ -12,18 +12,6 @@ import bhb_math "github.com/bhbosman/golang/math"
 // https://projecteuler.net/problem=29s
 //
 
-func Pow(a, b int) int {
-	p := 1
-	for b > 0 {
-		if b&1 != 0 {
-			p *= a
-		}
-		b >>= 1
-		a *= a
-	}
-	return p
-}
-
 type AB struct {
 	a, b int
 }
@@ -45,7 +33,7 @@ func TestSolution29_01(t *testing.T) {
 			divsB := bhb_math.FindAllDivisorsAndSum(primesFlatForBValue)
 			// fmt.Println(a, b, divsB)
 			for _, valueB := range divsB {
-				i, k := Pow(a, valueB), b/valueB
+				i, k := bhb_math.Pow(a, valueB), b/valueB
 				if between(i) && between(k) {
 					mapdata := AB{a: i, b: k}
 					if _, ok := excl[mapdata]; !ok {
@@ -116,7 +104,7 @@ func TestSolution29_02(t *testing.T) {
 			for f1 := 1; f1 < b1; f1++ {
 				if b3%f1 == 0 {
 					f2 := b3 / f1
-					a2 := Pow(a1, f1)
+					a2 := bhb_math.Pow(a1, f1)
 					if a2 <= max {
 						if f2 <= max {
 							duplicates[a2-1][f2-1] = true
@@ -129,7 +117,7 @@ func TestSolution29_02(t *testing.T) {
 
 	sweep := func(a int) {
 		for b := 2; b <= max; b++ {
-			c := Pow(a, b)
+			c := bhb_math.Pow(a, b)
 			if c > max {
 				break
 			}
@@ -178,7 +166,7 @@ func TestSolution29_03(t *testing.T) {
 				for d := 1; d < inputB; d++ {
 					if number%d == 0 {
 						a := number / d
-						b := Pow(inputA, d)
+						b := bhb_math.Pow(inputA, d)
 						delete(combinations, AB{a: a, b: b})
 					}
 				}
@@ -186,7 +174,7 @@ func TestSolution29_03(t *testing.T) {
 		}
 		for a := minValue; a <= maxValue; a++ {
 			for b := minValue; b <= maxValue; b++ {
-				c := Pow(a, b)
+				c := bhb_math.Pow(a, b)
 				if c > maxValue {
 					break
 				}

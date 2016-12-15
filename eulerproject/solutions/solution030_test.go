@@ -4,6 +4,10 @@ import "testing"
 import "fmt"
 import "strconv"
 
+import (
+	bhb_math "github.com/bhbosman/golang/math"
+)
+
 //
 // https://projecteuler.net/problem=30
 //
@@ -11,19 +15,19 @@ import "strconv"
 func TestSolution30_01(t *testing.T) {
 
 	number := 5
-	highNumber := Pow(9, number) * (number + 1)
+	highNumber := bhb_math.Pow(9, number) * (number + 1)
 	createData := func() [10]int {
 		data := [10]int{
-			Pow(0, number),
-			Pow(1, number),
-			Pow(2, number),
-			Pow(3, number),
-			Pow(4, number),
-			Pow(5, number),
-			Pow(6, number),
-			Pow(7, number),
-			Pow(8, number),
-			Pow(9, number)}
+			bhb_math.Pow(0, number),
+			bhb_math.Pow(1, number),
+			bhb_math.Pow(2, number),
+			bhb_math.Pow(3, number),
+			bhb_math.Pow(4, number),
+			bhb_math.Pow(5, number),
+			bhb_math.Pow(6, number),
+			bhb_math.Pow(7, number),
+			bhb_math.Pow(8, number),
+			bhb_math.Pow(9, number)}
 		return data
 	}
 	data := createData()
