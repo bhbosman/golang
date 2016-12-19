@@ -12,3 +12,12 @@ func Pow(a, b int) int {
 	}
 	return p
 }
+
+// Permutation ...
+func Permutation(n, k int) int {
+	result := 1
+	for i := 0; i < k; i++ {
+		result *= (n - i)
+	}
+	return result
+}
