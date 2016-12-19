@@ -1,29 +1,55 @@
 package solutions
 
-import "testing"
-import "fmt"
+import (
+	"fmt"
+	"math"
+	"testing"
+)
+
+import bhb_math "github.com/bhbosman/golang/math"
 
 //
 // https://projecteuler.net/problem=34
 //
 
 func TestSolution34_01(t *testing.T) {
-    init := func()[]int{
-        result := make([]int, 9, 9)
-        for i := 
-    }
-    fact
-	for k := 1; k <= 9; k++ {
-		for x := 1; x <= 9; x++ {
-			above := x*10 + k
-			for y := 1; y <= 9; y++ {
-				below := k*10 + y
-				if above < below {
-					if float64(x)/float64(y) == float64(above)/float64(below) {
-						fmt.Println(x, y, above, below)
-					}
-				}
+	maxValueforNDigits := func(n int) int {
+		return n * fact(9)
+	}
+	digitFactSum := func(n int) int {
+		digits := math.Log(float64(n)) / math.Log(float64(10))
+		return int(math.Ceil(digits))
+	}
+	sumDigits := func(n int) int {
+		leftOver := n
+		result := 0
+		digits := digitFactSum(n)
+		for i := digits - 1; i >= 0; i-- {
+			value := leftOver / bhb_math.Pow(10, i)
+			result += fact(value)
+			leftOver -= value * bhb_math.Pow(10, i)
+		}
+		return result
+	}
+
+	sum := 0
+
+	count := 0
+	for i := 2; true; i++ {
+		v1 := bhb_math.Pow(10, i) - 1
+		v2 := maxValueforNDigits(i)
+		maxK := maxValueforNDigits(i)
+		for k := v1; k <= maxK && k > bhb_math.Pow(10, i-1); k-- {
+			count++
+			d := sumDigits(k)
+			if d == k {
+				sum += k
+				fmt.Println(k)
 			}
 		}
+		if !(v1 <= v2) {
+			break
+		}
 	}
+	fmt.Println(count, sum)
 }
