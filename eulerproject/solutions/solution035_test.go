@@ -15,7 +15,6 @@ import (
 func TestSolution35_01(t *testing.T) {
 	primeList := bhb_math.AtkinsSievePrime(1000000)
 	primeListMap := make(map[int]bool)
-
 	for _, v := range primeList {
 		primeListMap[int(v)] = true
 	}
