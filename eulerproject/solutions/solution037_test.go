@@ -3,6 +3,7 @@ package solutions
 import (
 	"fmt"
 	"math"
+	"sort"
 	"testing"
 
 	bhb_math "github.com/bhbosman/golang/math"
@@ -44,6 +45,7 @@ func TestSolution37_01(t *testing.T) {
 		for key := range primes {
 			result = append(result, key)
 		}
+		sort.Ints(result)
 		return result, true
 	}
 
@@ -66,6 +68,7 @@ func TestSolution37_01(t *testing.T) {
 		for key := range primes {
 			result = append(result, key)
 		}
+		sort.Ints(result)
 		return result, true
 	}
 
