@@ -98,7 +98,7 @@ func TestSolution29_02(t *testing.T) {
 
 	duplicates := init()
 
-	mark_duplicates := func(a1 int, b1 int) {
+	markDuplicates := func(a1 int, b1 int) {
 		for b2 := 2; b2 <= max; b2++ {
 			b3 := b1 * b2
 			for f1 := 1; f1 < b1; f1++ {
@@ -121,11 +121,11 @@ func TestSolution29_02(t *testing.T) {
 			if c > max {
 				break
 			}
-			mark_duplicates(a, b)
+			markDuplicates(a, b)
 		}
 	}
 
-	count_nondups := func() int {
+	countNondups := func() int {
 		count := 0
 		for a := 2; a <= max; a++ {
 			for b := 2; b <= max; b++ {
@@ -144,7 +144,7 @@ func TestSolution29_02(t *testing.T) {
 		sweep(a)
 	}
 
-	fmt.Println(count_nondups())
+	fmt.Println(countNondups())
 
 }
 
