@@ -22,15 +22,12 @@ func main() {
 	t1 := time.Now()
 	fmt.Println(t1.Sub(t0))
 	ss.Save("")
-
 }
 
 func scene00004(scene *raytracer.Scene) {
-
 	for x := -2; x <= 2; x++ {
 		for y := -2; y <= 2; y++ {
 			for z := -10; z <= -6; z++ {
-
 				scene.AddObject(&raytracer.StandardSphere{
 					Sphere: raytracer.Sphere{
 						Origin: mgl64.Vec3{
@@ -139,7 +136,6 @@ func scene00003(scene *raytracer.Scene) {
 			Pd:              0.3,
 			Ps:              0.0,
 			Color:           mgl64.Vec3{1, 0, 0}}})
-
 }
 
 func scene00002(scene *raytracer.Scene) {
