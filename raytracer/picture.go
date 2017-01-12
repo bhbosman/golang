@@ -29,9 +29,7 @@ func (p *Picture) RayAt(x, y int) Ray {
 	r := o.Sub(p.camera.viewPoint).Normalize()
 	return Ray{
 		Origin:    o,
-		Direction: r,
-		x:         x,
-		y:         y}
+		Direction: r}
 }
 
 // GetWidth returns the pixel width of the picture

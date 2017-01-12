@@ -3,8 +3,8 @@ package raytracer
 import (
 	"math"
 
-	"github.com/go-gl/mathgl/mgl64"
 	bhbosmanVector "github.com/bhbosman/golang/vector"
+	"github.com/go-gl/mathgl/mgl64"
 )
 
 // Material ...
@@ -160,10 +160,8 @@ func (scene Scene) internalRayIntersect(r Ray, depth int, colorValueIntensity fl
 			if colorValueIntensity > 1e-08 {
 				reflectionDirection := bhbosmanVector.SpecularReflection(nhit, r.Direction)
 				reflectionRay := Ray{
-					phit.Add(reflectionDirection.Mul(1e-8)),
-					reflectionDirection,
-					r.x,
-					r.y}
+					Origin:    phit.Add(reflectionDirection.Mul(1e-8)),
+					Direction: reflectionDirection}
 				reflectionIntersected, _, localReflectionColor := scene.internalRayIntersect(
 					reflectionRay,
 					depth+1,
@@ -184,7 +182,9 @@ func (scene Scene) internalRayIntersect(r Ray, depth int, colorValueIntensity fl
 			cosT2 := 1.0 - n*n*(1.0-cosI*cosI)
 			if cosT2 > 0.0 {
 				T := r.Direction.Mul(n).Add(N.Mul(n*cosI - math.Sqrt(cosT2)))
-				refractionRay := Ray{phit.Add(T.Mul(1.0e-04)), T, r.x, r.y}
+				refractionRay := Ray{
+					Origin:    phit.Add(T.Mul(1.0e-04)),
+					Direction: T}
 				refractionIntersected, refractionDistance, localRefractionColor := scene.internalRayIntersect(
 					refractionRay,
 					depth+1,

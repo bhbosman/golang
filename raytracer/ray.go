@@ -25,13 +25,3 @@ type Ray struct {
 func (r Ray) PositionAt(time float64) (result mgl64.Vec3) {
 	return r.Origin.Add(r.Direction.Mul(time))
 }
-
-// GetX ...
-func (r Ray) GetX() int {
-	return r.x
-}
-
-// GetY ...
-func (r Ray) GetY() int {
-	return r.y
-}
