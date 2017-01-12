@@ -34,7 +34,6 @@ func TestSolution40_01(t *testing.T) {
 			}
 			power++
 			leftOver -= indexesCovered
-
 		}
 	}
 	ans := ChampernowneConstant(1) * ChampernowneConstant(10) * ChampernowneConstant(100) * ChampernowneConstant(1000) * ChampernowneConstant(10000) * ChampernowneConstant(100000) * ChampernowneConstant(1000000)
