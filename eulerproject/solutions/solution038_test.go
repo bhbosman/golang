@@ -7,19 +7,11 @@ import (
 	"testing"
 )
 
-// "fmt"
-
-// "sort"
-// "testing"
-
-// bhb_math "github.com/bhbosman/golang/math"
-
 //
 // https://projecteuler.net/problem=38
 //
 
 func TestSolution38_01(t *testing.T) {
-
 	isPandigital := func(s string) bool {
 		count := 9
 		data := make([]bool, 9, 9)
@@ -35,31 +27,26 @@ func TestSolution38_01(t *testing.T) {
 		}
 		return count == 0
 	}
-	min := func(value float64) int {
-		if value == 0 {
+	minStringCount := func(value int) int {
+		if value == 0.0 {
 			return 1
 		}
-		return int(value)
+		return value
 	}
 	index := 1
 	for {
-		multiplier := 1
 		numbers := 0
 		s := ""
-		for {
+		for multiplier := 1; multiplier <= 9; multiplier++ {
 			value := index * multiplier
 			s = s + strconv.Itoa(value)
-			digits := min(math.Ceil(math.Log10(float64(value))))
-			numbers += int(digits)
+			digits := minStringCount(int(math.Ceil(math.Log10(float64(value)))))
+			numbers += digits
 			if numbers == 9 {
 				if isPandigital(s) {
 					fmt.Println(index, multiplier, value, digits, numbers, s)
 				}
 			} else if numbers > 9 {
-				break
-			}
-			multiplier++
-			if multiplier > 9 {
 				break
 			}
 		}
