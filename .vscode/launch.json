@@ -1,6 +1,7 @@
 {
 	"version": "0.2.0",
 	"configurations": [
+		
 		{
 			"name": "RayTracer",
 			"type": "go",
@@ -10,6 +11,18 @@
 			"port": 2345,
 			"host": "127.0.0.1",
 			"program": "${workspaceRoot}/raytracer/example",
+			"env": {},
+			"args": []
+		},
+		{
+			"name": "a",
+			"type": "go",
+			"request": "launch",
+			"mode": "debug",
+			"remotePath": "",
+			"port": 2345,
+			"host": "127.0.0.1",
+			"program": "${workspaceRoot}/aaaaaaa",
 			"env": {},
 			"args": []
 		}
