@@ -1,2 +1,0 @@
-# golang
-My golang repo

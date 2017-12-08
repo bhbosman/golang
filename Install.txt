@@ -15,3 +15,6 @@ go get -u golang.org/x/tools/cmd/guru
 go get -u github.com/matryer/goblueprints
 go get -u github.com/go-gl/mathgl/mgl64
 go get -u github.com/Workiva/go-datastructures
+
+
+go get -u github.com/stretchr/testify
